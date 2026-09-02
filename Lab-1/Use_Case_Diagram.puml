@@ -1,0 +1,43 @@
+@startuml Use_Case_Diagram
+
+skinparam backgroundColor white
+skinparam usecaseFontSize 13
+skinparam actorFontSize 13
+skinparam usecaseBorderColor #333333
+skinparam usecaseBackgroundColor #E8F4FD
+skinparam actorBorderColor #333333
+skinparam packageBorderColor #555555
+skinparam packageBackgroundColor #FAFAFA
+skinparam arrowColor #333333
+skinparam stereotypeFontSize 11
+
+title **UML Use-Case Diagram — Incident Escalation & On-Call Rotation Engine**\n(Problem Statement #48 | Arjun Srikanth — PES1UG24AM920)
+
+left to right direction
+
+actor "Monitoring\nSystem" as MS
+actor "On-Call\nEngineer" as OCE
+actor "Incident\nCommander" as IC
+
+rectangle "Incident Escalation & On-Call Rotation Engine" {
+    usecase "UC-01:\nIngest Incident\nAlert" as UC1
+    usecase "UC-02:\nNotify On-Call\nEngineer" as UC2
+    usecase "UC-03:\nEscalate\nIncident" as UC3
+    usecase "UC-04:\nAcknowledge /\nResolve Incident" as UC4
+    usecase "UC-05:\nManage On-Call\nRotation Schedule" as UC5
+    usecase "UC-06:\nGenerate Post-Mortem\nReport" as UC6
+}
+
+MS --> UC1
+
+OCE --> UC4
+OCE --> UC6
+
+IC --> UC3
+IC --> UC5
+IC --> UC6
+
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC3 : <<extend>>
+
+@enduml
