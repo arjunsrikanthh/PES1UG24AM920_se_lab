@@ -1,0 +1,151 @@
+@startuml Problem_Statement_48_Component_Diagram
+
+skinparam backgroundColor #FFFFFF
+skinparam handwritten false
+skinparam componentStyle uml2
+skinparam shadowing false
+skinparam defaultFontName "Helvetica, Arial, sans-serif"
+skinparam defaultFontSize 11
+
+' Styling Components
+skinparam component {
+    BackgroundColor #EBF3FB
+    BorderColor #1E5180
+    BorderThickness 1.5
+    FontSize 12
+    FontStyle bold
+    FontColor #0C2340
+}
+
+' Styling Interfaces
+skinparam interface {
+    BackgroundColor #FFF9C4
+    BorderColor #F57F17
+    BorderThickness 1.5
+    FontSize 10
+    FontColor #37474F
+}
+
+' Styling Packages / Boundaries
+skinparam package {
+    BackgroundColor #F8FAFC
+    BorderColor #90A4AE
+    BorderThickness 1.5
+    FontStyle bold
+    FontColor #263238
+}
+
+' Styling Arrows & Ports
+skinparam arrow {
+    Color #37474F
+    FontSize 10
+    FontColor #455A64
+    Thickness 1.2
+}
+
+skinparam port {
+    BackgroundColor #CFD8DC
+    BorderColor #455A64
+}
+
+title **UML Component Diagram — Incident Escalation & On-Call Rotation Engine**\n(Problem Statement #48 | Student: Arjun Srikanth — PES1UG24AM920)
+
+package "External Systems & Actors" #FAFAFA {
+    actor "Monitoring Systems\n(Prometheus / Datadog)" as MonitoringPlatform
+    actor "On-Call Engineer /\nIncident Commander" as Engineers
+    [Telecom Cloud Gateway\n(Twilio Voice / SMS / SMTP)] as TelecomGateway
+    database "Distributed Data Store\n(PostgreSQL / Redis Cluster)" as DataStore
+}
+
+package "Incident Escalation & On-Call Rotation Engine Boundary" {
+
+    ' Component 1: Webhook Ingestion Gateway
+    component "Webhook Ingestion\nGateway" as IngestGW <<component>> {
+        portin p_webhook_in
+        portout p_event_out
+    }
+
+    ' Component 2: Rotation & Schedule Manager
+    component "Rotation & Schedule\nManager" as RotaMgr <<component>> {
+        portin p_sched_cfg
+        portout p_lookup_srv
+        portout p_db_rota
+    }
+
+    ' Component 3: Escalation & Rules Engine
+    component "Escalation &\nRules Engine" as EscalateEngine <<component>> {
+        portin p_rule_cfg
+        portin p_trigger_in
+        portout p_sched_req
+        portout p_notify_req
+        portout p_state_sync
+    }
+
+    ' Component 4: Multi-Channel Notification Service
+    component "Multi-Channel\nNotification Service" as NotifySvc <<component>> {
+        portin p_notify_in
+        portout p_telecom_out
+    }
+
+    ' Component 5: Triage & Incident Lifecycle Manager
+    component "Triage & Incident\nLifecycle Manager" as TriageMgr <<component>> {
+        portin p_dash_in
+        portin p_remote_ack_in
+        portout p_halt_timer
+        portout p_resolve_out
+    }
+
+    ' Component 6: Post-Mortem & Telemetry Store
+    component "Post-Mortem &\nTelemetry Store" as PostMortemSvc <<component>> {
+        portin p_audit_in
+        portout p_db_audit
+    }
+}
+
+' Interfaces Definition (Ball & Socket)
+interface "IAlertWebhook\n(HTTPS / POST)" as IAlertWebhook
+interface "IScheduleLookup\n(gRPC / Internal API)" as IScheduleLookup
+interface "IRotationConfig\n(REST API)" as IRotationConfig
+interface "INotifyDispatch\n(gRPC / Async Queue)" as INotifyDispatch
+interface "IEscalationControl\n(Event Stream / RPC)" as IEscalationControl
+interface "IDashboardAPI\n(GraphQL / HTTPS)" as IDashboardAPI
+interface "IRemoteTriageWebhook\n(Twilio Webhook / Voice IVR)" as IRemoteTriageWebhook
+interface "IPostMortemTrigger\n(Internal Event)" as IPostMortemTrigger
+interface "ISqlPersistence\n(TLS Encrypted SQL)" as ISqlPersistence
+
+' Connectors - Ingestion Flow
+MonitoringPlatform --> IAlertWebhook : alerts payload
+IAlertWebhook -- p_webhook_in
+p_event_out --> p_trigger_in : <<use>>\nforward valid alert
+
+' Connectors - Rotation & Schedule Manager
+Engineers --> IRotationConfig : configure shifts / overrides
+IRotationConfig -- p_sched_cfg
+p_lookup_srv -- IScheduleLookup : provides responder lookup
+p_sched_req ..( IScheduleLookup : <<use>>\nqueries on-call engineer
+
+' Connectors - Escalation Engine & Notification
+EscalateEngine -- IEscalationControl : SLA timer & tier status
+p_notify_in -- INotifyDispatch : provides alert dispatch
+p_notify_req ..( INotifyDispatch : <<use>>\ndispatch Tier-1/Tier-2 alert
+p_telecom_out --> TelecomGateway : <<use>>\nSMS, Voice IVR, Email (<3s)
+
+' Connectors - Triage & User ACK / Resolution
+Engineers --> IDashboardAPI : Web triage (ACK/Resolve)
+IDashboardAPI -- p_dash_in
+TelecomGateway --> IRemoteTriageWebhook : SMS 'ACK' / Phone keypress
+IRemoteTriageWebhook -- p_remote_ack_in
+p_halt_timer ..( IEscalationControl : <<use>>\nhalt 5-min timer on ACK
+
+' Connectors - Post-Mortem & Audit
+p_resolve_out -- IPostMortemTrigger : on resolution
+IPostMortemTrigger )-- p_audit_in : auto-generate template
+Engineers ..( IDashboardAPI : review & edit post-mortem
+
+' Database & Persistence connections
+p_db_rota --> ISqlPersistence
+p_state_sync --> ISqlPersistence
+p_db_audit --> ISqlPersistence
+ISqlPersistence -- DataStore
+
+@enduml

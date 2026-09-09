@@ -29,3 +29,16 @@
   * [Deliverable 1: Backlog with Epics & Story Points](./Lab-2/Deliverable_Screenshot_1_Backlog_Epics.png)
   * [Deliverable 2: Active Sprint Board](./Lab-2/Deliverable_Screenshot_2_Active_Sprint_Board.png)
   * [Deliverable 3: Burndown Chart](./Lab-2/Deliverable_Screenshot_3_Burndown_Chart.png)
+
+---
+
+### 📁 [Lab-3](./Lab-3) — Component Modelling & Architectural Pattern Selection
+* [`Architectural_Pattern_Selection_Justification.md`](./Lab-3/Architectural_Pattern_Selection_Justification.md): Full architectural evaluation (Layered vs Microservices vs Client-Server), explicit pattern selection, scenario rationales, security advantages, performance benefits, and component-interface dictionaries.
+* [`PES1UG24AM920_SE_Lab3_Report.pdf`](./Lab-3/PES1UG24AM920_SE_Lab3_Report.pdf): Official 4-page academic PDF report with comparison table, justifications, component dictionaries, and embedded diagrams.
+* [`PES1UG24AM920_SE_Lab3_Report.docx`](./Lab-3/PES1UG24AM920_SE_Lab3_Report.docx): Submission-ready Microsoft Word report document.
+* **Deliverables for Assigned Scenario (Problem Statement #48: Incident Escalation & On-Call Rotation Engine)**:
+  * [Component Diagram (PNG)](./Lab-3/Problem_Statement_48_Component_Diagram.png) / [Component Diagram (PDF)](./Lab-3/Problem_Statement_48_Component_Diagram.pdf): UML 2.5 Component Diagram (6 components, 8 ball-and-socket interfaces, ports, and event bus).
+  * [`Problem_Statement_48_Component_Diagram.puml`](./Lab-3/Problem_Statement_48_Component_Diagram.puml): PlantUML source code.
+* **Deliverables for Handout Scenario (Self-Service Coffee Kiosk System)**:
+  * [Component Diagram (PNG)](./Lab-3/Coffee_Kiosk_Component_Diagram.png) / [Component Diagram (PDF)](./Lab-3/Coffee_Kiosk_Component_Diagram.pdf): UML 2.5 Component Diagram (5 components including Order Manager & Payment Service, 8 ball-and-socket interfaces).
+  * [`Coffee_Kiosk_Component_Diagram.puml`](./Lab-3/Coffee_Kiosk_Component_Diagram.puml): PlantUML source code.
