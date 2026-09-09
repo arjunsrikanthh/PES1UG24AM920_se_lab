@@ -1,15 +1,12 @@
-@startuml Coffee_Kiosk_Component_Diagram
-
-skinparam backgroundColor #FFFFFF
-skinparam handwritten false
+@startuml
 skinparam componentStyle uml2
 skinparam shadowing false
-skinparam defaultFontName "Helvetica, Arial, sans-serif"
+skinparam defaultFontName Arial
 skinparam defaultFontSize 11
+skinparam roundCorner 8
 
-' Component Styling
 skinparam component {
-    BackgroundColor #FFF3E0
+    BackgroundColor #FFF8E1
     BorderColor #E65100
     BorderThickness 1.5
     FontSize 12
@@ -17,7 +14,6 @@ skinparam component {
     FontColor #3E2723
 }
 
-' Interface Styling
 skinparam interface {
     BackgroundColor #E1F5FE
     BorderColor #0277BD
@@ -26,116 +22,44 @@ skinparam interface {
     FontColor #263238
 }
 
-' Package Styling
-skinparam package {
-    BackgroundColor #FAFAFA
-    BorderColor #8D6E63
-    BorderThickness 1.5
-    FontStyle bold
-    FontColor #3E2723
+title **UML Component Diagram — Self-Service Coffee Kiosk System**\n(Student: Arjun Srikanth — PES1UG24AM920)
+
+actor "Customer" as Customer
+[EMV Card Reader\nHardware] as CardReaderHW
+[Thermal Receipt Printer\nHardware] as PrinterHW
+cloud "Bank Payment Gateway\n(TLS 1.3)" as BankGateway
+database "Local Storage\n(SQLite)" as LocalDB
+
+package "Self-Service Coffee Kiosk Software" {
+    component "Touchscreen Kiosk UI\nComponent" as KioskUI <<component>>
+    component "Order Manager\nComponent (Given)" as OrderMgr <<component>>
+    component "Payment Service\nComponent (Given)" as PaymentSvc <<component>>
+    component "Menu & Pricing Catalog\nComponent" as MenuCatalog <<component>>
+    component "Printer Controller\nComponent" as PrinterCtrl <<component>>
 }
 
-' Arrow & Port Styling
-skinparam arrow {
-    Color #4E342E
-    FontSize 10
-    FontColor #4E342E
-    Thickness 1.2
-}
+interface "IOrderPlacement" as IOrderPlacement
+interface "IMenuQuery" as IMenuQuery
+interface "IPaymentProcess" as IPaymentProcess
+interface "IPrintJob" as IPrintJob
 
-skinparam port {
-    BackgroundColor #D7CCC8
-    BorderColor #4E342E
-}
+Customer --> KioskUI : selects coffee & size
+KioskUI ..( IOrderPlacement : <<use>>
+IOrderPlacement -- OrderMgr
 
-title **UML Component Diagram — Self-Service Coffee Kiosk System**\n(Lab 3 Handout Scenario | Student: Arjun Srikanth — PES1UG24AM920)
+KioskUI ..( IMenuQuery : <<use>>
+MenuCatalog -- IMenuQuery
+OrderMgr ..( IMenuQuery : <<use>>
 
-package "Kiosk Hardware & External Actors" #F5F5F5 {
-    actor "Customer\n(Touch Interaction)" as CustomerActor
-    [EMV Credit Card Reader\n(POS Terminal Hardware)] as CardReaderHW
-    [Thermal Receipt Printer\n(ESC/POS USB/Serial)] as PrinterHW
-    cloud "Bank Payment Gateway\n(Acquiring Bank / Visa / MC)" as BankCloud
-    database "Local Kiosk Storage\n(SQLite / Config DB)" as LocalDB
-}
+OrderMgr ..( IPaymentProcess : <<use>>\npayment request
+IPaymentProcess -- PaymentSvc
 
-package "Self-Service Coffee Kiosk Software Boundary" {
+OrderMgr ..( IPrintJob : <<use>>\nprint receipt
+IPrintJob -- PrinterCtrl
 
-    ' Component 1: Touchscreen Kiosk UI
-    component "Touchscreen Kiosk UI\n(Presentation Layer)" as KioskUI <<component>> {
-        portin p_touch_in
-        portout p_ui_menu_req
-        portout p_ui_order_req
-    }
-
-    ' Component 2: Order Manager Component (Handout Specified)
-    component "Order Manager\nComponent" as OrderMgr <<component>> {
-        portin p_order_in
-        portout p_order_menu_req
-        portout p_pay_req
-        portout p_print_req
-    }
-
-    ' Component 3: Payment Service Component (Handout Specified)
-    component "Payment Service\nComponent" as PaymentSvc <<component>> {
-        portin p_pay_in
-        portout p_pos_hw_req
-        portout p_bank_req
-    }
-
-    ' Component 4: Menu & Pricing Catalog
-    component "Menu & Pricing\nCatalog" as MenuCatalog <<component>> {
-        portin p_catalog_in
-        portout p_db_req
-    }
-
-    ' Component 5: Printer Controller Component
-    component "Printer Controller\nComponent" as PrinterCtrl <<component>> {
-        portin p_print_in
-        portout p_driver_req
-    }
-}
-
-' UML Interfaces (Ball and Socket)
-interface "IOrderPlacement\n(Internal IPC API)" as IOrderPlacement
-interface "IMenuQuery\n(Catalog Lookup API)" as IMenuQuery
-interface "IPaymentProcess\n(Payment Request API)" as IPaymentProcess
-interface "IPrintJob\n(Receipt Generation API)" as IPrintJob
-interface "ICardReaderDriver\n(USB Serial / EMV API)" as ICardReaderDriver
-interface "IBankGatewayAPI\n(HTTPS TLS 1.3 / ISO 8583)" as IBankGatewayAPI
-interface "IESCPOSDriver\n(Hardware IO Stream)" as IESCPOSDriver
-interface "ILocalDataQuery\n(SQL / SQLite)" as ILocalDataQuery
-
-' Connections - Customer UI Flow
-CustomerActor --> p_touch_in : selects coffee (Espresso/Latte/Americano)\n& size (Small/Large)
-KioskUI -- IOrderPlacement : submits cart
-p_ui_order_req ..( IOrderPlacement : <<use>>
-
-' Connections - Menu Query
-MenuCatalog -- IMenuQuery : provides coffee items & prices
-p_ui_menu_req ..( IMenuQuery : <<use>>\nfetch menu
-p_order_menu_req ..( IMenuQuery : <<use>>\nvalidate prices
-
-' Connections - Order Manager & Handout Given Interface
-p_order_in -- IOrderPlacement
-OrderMgr -- IPaymentProcess : coordinates checkout
-p_pay_req ..( IPaymentProcess : <<use>>\npayment processing request
-
-' Connections - Payment Service & External Providers
-p_pay_in -- IPaymentProcess
-PaymentSvc ..( ICardReaderDriver : <<use>>\nread chip / tap card
-ICardReaderDriver -- CardReaderHW
-PaymentSvc ..( IBankGatewayAPI : <<use>>\ncredit card authorization
-IBankGatewayAPI -- BankCloud
-
-' Connections - Receipt Printing
-OrderMgr -- IPrintJob : triggers print on payment success
-p_print_req ..( IPrintJob : <<use>>
-p_print_in -- IPrintJob
-PrinterCtrl ..( IESCPOSDriver : <<use>>\nsends ESC/POS bytecode
-IESCPOSDriver -- PrinterHW
-
-' Connections - Persistence
-MenuCatalog ..( ILocalDataQuery : <<use>>
-ILocalDataQuery -- LocalDB
+PaymentSvc --> CardReaderHW : read chip/NFC
+PaymentSvc --> BankGateway : authorize
+PrinterCtrl --> PrinterHW : ESC/POS
+MenuCatalog --> LocalDB : SQL query
 
 @enduml
