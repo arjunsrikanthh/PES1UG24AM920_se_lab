@@ -10,8 +10,14 @@ Original commit: `4402faa66a1f3ee701c1dbdece783a08bc8c241e`.
 - [before.mp4](before.mp4): 10 seconds of the unchanged starter.
 - [after.mp4](after.mp4): 10 seconds showing the completed game.
 - [helicopter/](helicopter/): updated Python source and behavioral tests.
-- [PES1UG24AM920.pdf](PES1UG24AM920.pdf): Lab 4 conversation export.
-- [Chat/LLM page](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/blob/main/Lab-4/chat_history.md): the same conversation in readable form.
+- [PES1UG24AM920.pdf](PES1UG24AM920.pdf): actual Codex/subagent conversation export.
+
+[Conversation page - GitHub PDF preview](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/blob/main/Lab-4/PES1UG24AM920.pdf).
+
+Conversation scope: Codex authored the delegation prompts and implemented the
+game; subagents provided tests and review. Student messages are omitted, not
+reattributed. This delegation-only export may not satisfy the instructor's
+complete student-to-AI chat-history requirement.
 
 ## Completed tasks
 
