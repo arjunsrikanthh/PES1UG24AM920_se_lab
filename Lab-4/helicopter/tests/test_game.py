@@ -156,7 +156,7 @@ class GameEngineTests(unittest.TestCase):
         self.engine.handle_keydown(pygame.K_r)
         self.assertEqual(self.engine.distance, 0.0)
 
-    def test_shield_clears_exactly_the_hit_wall_and_is_consumed(self):
+    def test_shield_absorbs_one_obstacle_and_is_consumed(self):
         self.engine.obstacles = [self.obstacle()]
         self.engine.helicopter.y = 100
         self.engine.handle_keydown(pygame.K_SPACE)
@@ -165,9 +165,7 @@ class GameEngineTests(unittest.TestCase):
         self.engine.update()
         self.assertFalse(self.engine.game_over)
         self.assertFalse(self.engine.helicopter.shield_active)
-        self.assertFalse(self.engine.obstacles[0].get_top_rect())
-        self.assertTrue(self.engine.obstacles[0].get_bottom_rect())
-        self.assertGreater(self.engine.shield_hit_frames, 0)
+        self.assertEqual(self.engine.obstacles, [])
 
         self.engine.update()
         self.assertFalse(self.engine.game_over)
@@ -183,16 +181,14 @@ class GameEngineTests(unittest.TestCase):
         self.engine.update()
         self.assertTrue(self.engine.game_over)
 
-    def test_second_distinct_wall_is_lethal_after_shield_is_consumed(self):
-        self.engine.obstacles = [self.obstacle()]
+    def test_two_obstacle_hits_cannot_be_absorbed_by_one_shield(self):
+        self.engine.obstacles = [self.obstacle(), self.obstacle()]
         self.engine.helicopter.y = 100
         self.engine.handle_keydown(pygame.K_SPACE)
         self.engine.update()
-        self.assertFalse(self.engine.game_over)
-
-        self.engine.helicopter.y = 400
-        self.engine.update()
         self.assertTrue(self.engine.game_over)
+        self.assertFalse(self.engine.helicopter.shield_active)
+        self.assertEqual(len(self.engine.obstacles), 1)
 
     def test_space_can_rearm_shield_during_play(self):
         self.engine.obstacles = [self.obstacle()]
@@ -204,19 +200,19 @@ class GameEngineTests(unittest.TestCase):
         self.engine.handle_keydown(pygame.K_SPACE)
         self.assertTrue(self.engine.helicopter.shield_active)
         self.engine.helicopter.y = 400
+        self.engine.obstacles.append(self.obstacle())
         self.engine.update()
         self.assertFalse(self.engine.game_over)
         self.assertFalse(self.engine.helicopter.shield_active)
 
-    def test_bottom_shield_hit_does_not_clear_the_top_wall(self):
+    def test_bottom_wall_hit_also_consumes_the_shield(self):
         wall = self.obstacle()
         self.engine.obstacles = [wall]
         self.engine.helicopter.y = 400
         self.engine.handle_keydown(pygame.K_SPACE)
         self.engine.update()
         self.assertFalse(self.engine.game_over)
-        self.assertTrue(wall.get_top_rect())
-        self.assertFalse(wall.get_bottom_rect())
+        self.assertEqual(self.engine.obstacles, [])
         self.assertFalse(self.engine.helicopter.shield_active)
 
     def test_long_held_keys_cannot_leave_either_screen_edge(self):

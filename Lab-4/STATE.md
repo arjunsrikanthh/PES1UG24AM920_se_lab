@@ -48,14 +48,33 @@ the handout prohibits a PR to SETAPESU26.
 
 ## Next action
 
-Lab 4 correction is complete. Review the final after video and use the published
-Lab-4 folder for submission. No LMS submission or grading is claimed here.
+User requested a minimal solution and playable before/after versions. Simplification
+and matching video/transcript are verified. Both native games are open for manual
+play; finish publication verification and synchronize the local final folder.
+No LMS submission or grading is claimed here.
 Keep accepted Labs 1-3 frozen. On resuming, inspect this file, personal main and
 the working checkout before making changes; do not use the obsolete outer origin.
 
 ## Verified evidence
 
-Current correction evidence:
+Current simplified version:
+- Removed per-wall destruction state, contact-set helper and hit timer. A shield
+  hit consumes the shield and removes that obstacle; the next obstacle is lethal.
+- 33 fewer runtime lines than the previous version. Obstacle class is identical
+  to the original starter. Keep only the four assigned tasks; no gameplay redesign.
+- 18 tests pass, including touching, safe gaps, bounds, reversal, distance/reset,
+  single-hit shield, reactivation and two simultaneous obstacle hits.
+- Matching native after video: 10.000 seconds, 300 frames, 30 fps, 1400 x 1184.
+  Full decode passes; visually inspected the complete ten seconds. Original before
+  video remains unchanged. Demonstrates bottom containment, reversal, safe gap,
+  one shield hit, next lethal wall and restart. No gameplay or timing is bypassed.
+- Transcript: 29 visible entries, five pages, exported 2026-10-07 13:56:51 IST.
+  Every rendered page inspected. Actual Lab 4 conversation, no invented prompts.
+- Manual play: BEFORE - Original lab starter and AFTER - Fixed lab game launched
+  with native titles and positions. Up/Down in both; Space shield and R restart
+  after game over in the completed game. On resume, do not assume they still run.
+
+Previous publication evidence (superseded locally by the simplification above):
 - Old shield behavior granted immunity during continued contact with a solid wall;
   user correctly flagged its confusing visible pass-through.
 - Replaced it with explicit single-wall destruction on shield impact, immediate
@@ -123,5 +142,4 @@ User selected a Lab 4-only transcript page on GitHub; do not share the full chat
 
 ## Blockers
 
-None. Requested correction and deliverables are complete; awaiting user submission
-and any subsequent instructor feedback.
+None. Both playable games are open. Publication verification remains.
