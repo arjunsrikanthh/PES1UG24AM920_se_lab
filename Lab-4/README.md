@@ -9,10 +9,10 @@ Original starter commit: `4402faa66a1f3ee701c1dbdece783a08bc8c241e`.
 
 - `before.mp4`: 10 seconds of the unchanged starter, captured from its native
   Pygame window. Direction reversal lags and the helicopter leaves the screen.
-- `after.mp4`: 10 seconds demonstrating the completed game (pending).
+- `after.mp4`: 10 seconds demonstrating the completed game.
 - `helicopter/`: updated Python source with separate commits for Tasks 1-4.
-- `chat_history.pdf`: actual Lab 4 conversation export (pending).
-- `chat_history.md`: readable transcript page (pending).
+- `PES1UG24AM920.pdf`: actual Lab 4 conversation export.
+- `chat_history.md`: readable transcript page.
 - `STATE.md`: durable progress and resume notes.
 
 The course handout is at
@@ -22,11 +22,12 @@ The assignment spreadsheet maps PES1UG24AM920 to serial 8, this Helicopter game.
 
 ## Run
 
-Python 3.10 or newer is required.
+Python 3.10 or newer is required. Tested with Python 3.12 and Pygame 2.6.1;
+Python 3.12 is recommended for the setup commands below.
 
 ```sh
 cd Lab-4/helicopter
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python main.py
@@ -39,5 +40,51 @@ python main.py
 3. Add distance scoring with reset on a new game.
 4. Add a visibly active shield that absorbs exactly one contact.
 
-All four tasks are being implemented in separate commits. No pull request is
-created against the instructor's repository.
+All four tasks are implemented in separate commits:
+
+| Task | Commit | Result |
+| --- | --- | --- |
+| Original starter and evidence | `ad2ae50` | Unchanged source and before video |
+| 1 Movement and boundaries | `f18e311` | Speed cap, immediate reversal, complete body containment |
+| 2 Collision and game over | `8af216a` | Either wall, exact edge contact, restart with R |
+| 3 Distance scoring | `76bacf6` | Pixels traveled, final distance, reset on new game |
+| 4 Shield | `c4eeefa` | Space activates, blue outline, one contact absorbed |
+
+## Controls and behavior
+
+- Up and Down move the helicopter; both together act as released input.
+- Space activates the shield. The blue outline and HUD show when it is active.
+- One wall contact consumes the shield. Overlap during that same continuous
+  contact does not count as repeated hits. A new wall or separation and re-entry
+  is lethal unless the player presses Space again.
+- R starts a fresh game after game over. Distance is measured in scrolled pixels.
+- Close the window to exit.
+
+## Verification and evidence
+
+```sh
+cd Lab-4/helicopter
+python -m unittest discover -s tests -v
+```
+
+All 14 deterministic behavioral tests pass. Checks cover velocity caps, immediate
+reversal, both screen edges, exact wall contact, safe gap margins, frozen game
+over, restart, distance, shield consumption, re-entry and reactivation.
+
+Both MP4 videos are native macOS screen recordings of the running Pygame window,
+encoded at 30 fps with their original timing and exactly 10.000 seconds duration.
+The after video uses a reproducible random obstacle seed (3) and ordinary native
+keyboard input. No gameplay is bypassed, sped up, or replaced with drawn evidence.
+The live game retains random obstacles on normal launch.
+
+## Chat link
+
+[Complete Lab 4 user and assistant transcript](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/blob/main/Lab-4/chat_history.md)
+
+The PDF and Markdown export contain the real visible conversation beginning at
+the Lab 4 request through their stated export time. Internal reasoning and tool
+logs are excluded. The user selected this Lab 4-only transcript instead of sharing
+earlier conversation content.
+
+No pull request is created against the instructor's repository. Accepted Labs 1-3
+remain identical to commit `4223a00`.
