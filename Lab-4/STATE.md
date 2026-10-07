@@ -49,8 +49,9 @@ the handout prohibits a PR to SETAPESU26.
 ## Next action
 
 User requested a minimal solution and playable before/after versions. Simplification
-and matching video/transcript are verified. Both native games are open for manual
-play; finish publication verification and synchronize the local final folder.
+and matching video/transcript are verified and published. Both native games are
+open for manual play. Await user feedback; keep any further changes focused on
+the four assigned tasks. The local final folder mirrors tracked Lab-4 files.
 No LMS submission or grading is claimed here.
 Keep accepted Labs 1-3 frozen. On resuming, inspect this file, personal main and
 the working checkout before making changes; do not use the obsolete outer origin.
@@ -73,6 +74,9 @@ Current simplified version:
 - Manual play: BEFORE - Original lab starter and AFTER - Fixed lab game launched
   with native titles and positions. Up/Down in both; Space shield and R restart
   after game over in the completed game. On resume, do not assume they still run.
+- Simplification package commit: 92b5f3a. Published Lab-4 tree matches local HEAD.
+  After video blob: 1cae0c0caefdd0749ebb07848c72600dbb296a7b.
+  Labs 1-3 remain identical to accepted 4223a00.
 
 Previous publication evidence (superseded locally by the simplification above):
 - Old shield behavior granted immunity during continued contact with a solid wall;
@@ -142,4 +146,4 @@ User selected a Lab 4-only transcript page on GitHub; do not share the full chat
 
 ## Blockers
 
-None. Both playable games are open. Publication verification remains.
+None. Both playable games are open and the minimal submission is published.
