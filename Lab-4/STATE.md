@@ -44,12 +44,14 @@ the handout prohibits a PR to SETAPESU26.
 - [x] Record and verify completed 10-second gameplay video.
 - [x] Export actual Lab 4 conversation and package deliverables.
 - [x] Push personal repository and verify remote content and accepted-file hashes.
+- [x] Resolve reported wall passage, expand tests, and publish a clearer after video.
 
 ## Next action
 
-Correction code, native video and refreshed transcript are verified. Publish the
-revised package, verify remote hashes and synchronize the local final folder.
-Keep accepted Labs 1-3 frozen.
+Lab 4 correction is complete. Review the final after video and use the published
+Lab-4 folder for submission. No LMS submission or grading is claimed here.
+Keep accepted Labs 1-3 frozen. On resuming, inspect this file, personal main and
+the working checkout before making changes; do not use the obsolete outer origin.
 
 ## Verified evidence
 
@@ -74,7 +76,13 @@ Current correction evidence:
 - Transcript: 22 actual visible Lab 4 entries, exported 2026-10-07 13:44:40 IST;
   four-page PDF rendered and every page visually inspected. Automated context and
   earlier lab discussion excluded; media/app links are rendered as readable links.
-- Revised documentation and package are not yet published.
+- Revised package commit 6b8c847882214a69bcbd12ea4195d98439b4e214 pushed to
+  personal main. Remote SHA and all 15 Lab-4 file blobs matched the local checkout.
+- Published before video remains unchanged: cf6dda37c02635bb57798d01ec9f8fb6c66d82dd.
+- Published after video: 9e0c0e39ce40596ab9371f111d57b038f697b933.
+- Accepted Labs 1-3 remain identical to 4223a00 (git diff exit 0).
+- Local final package is synchronized from tracked Lab-4 files; unexpected Finder
+  icon metadata is preserved and is not a submission requirement.
 
 Earlier publication evidence (superseded after video and shield model):
 
@@ -115,4 +123,5 @@ User selected a Lab 4-only transcript page on GitHub; do not share the full chat
 
 ## Blockers
 
-None. Only publication verification and final-package synchronization remain.
+None. Requested correction and deliverables are complete; awaiting user submission
+and any subsequent instructor feedback.
