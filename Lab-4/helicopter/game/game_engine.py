@@ -24,7 +24,7 @@ class GameEngine:
         self.frames_until_spawn = 0
         self.game_over = False
         self.distance = 0.0
-        self._absorbed_contacts = set()
+        self.shield_hit_frames = 0
 
     def _spawn_obstacle(self):
         margin = 60
@@ -50,6 +50,8 @@ class GameEngine:
         for obstacle in self.obstacles:
             for side, wall in (('top', obstacle.get_top_rect()),
                                ('bottom', obstacle.get_bottom_rect())):
+                if not wall.width or not wall.height:
+                    continue
                 # Rect.colliderect excludes exact edges; the task says touching.
                 if (body.left <= wall.right and body.right >= wall.left
                         and body.top <= wall.bottom and body.bottom >= wall.top):
@@ -59,6 +61,7 @@ class GameEngine:
     def update(self):
         if self.game_over:
             return
+        self.shield_hit_frames = max(0, self.shield_hit_frames - 1)
         self.helicopter.update(HEIGHT)
 
         self.frames_until_spawn -= 1
@@ -71,12 +74,11 @@ class GameEngine:
         self.distance += SCROLL_SPEED
         self.obstacles = [o for o in self.obstacles if not o.is_off_screen()]
         contacts = self._wall_contacts()
-        # One collision is a continuous contact, rather than every overlap frame.
-        self._absorbed_contacts.intersection_update(contacts)
-        for contact in contacts - self._absorbed_contacts:
+        for obstacle, side in contacts:
             if self.helicopter.shield_active:
                 self.helicopter.shield_active = False
-                self._absorbed_contacts.add(contact)
+                obstacle.clear_wall(side)
+                self.shield_hit_frames = 60
             else:
                 self.game_over = True
                 break
@@ -84,9 +86,7 @@ class GameEngine:
     def draw(self, surface, font):
         from game import renderer
         renderer.draw_scene(surface, self.helicopter, self.obstacles)
-        renderer.draw_text(surface, font, f'Distance: {int(self.distance)} px', (14, 14))
-        shield_status = 'ON (1 hit)' if self.helicopter.shield_active else 'OFF'
-        renderer.draw_text(surface, font, f'Shield: {shield_status}', (400, 14))
-        renderer.draw_text(surface, font, 'Up / Down: move   Space: shield   R: restart', (14, HEIGHT - 34))
+        renderer.draw_hud(surface, font, self.distance, self.helicopter.shield_active,
+                          self.shield_hit_frames > 0)
         if self.game_over:
             renderer.draw_game_over(surface, font, self.distance)

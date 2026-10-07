@@ -156,7 +156,7 @@ class GameEngineTests(unittest.TestCase):
         self.engine.handle_keydown(pygame.K_r)
         self.assertEqual(self.engine.distance, 0.0)
 
-    def test_shield_is_consumed_by_one_contiguous_wall_contact(self):
+    def test_shield_clears_exactly_the_hit_wall_and_is_consumed(self):
         self.engine.obstacles = [self.obstacle()]
         self.engine.helicopter.y = 100
         self.engine.handle_keydown(pygame.K_SPACE)
@@ -165,20 +165,21 @@ class GameEngineTests(unittest.TestCase):
         self.engine.update()
         self.assertFalse(self.engine.game_over)
         self.assertFalse(self.engine.helicopter.shield_active)
+        self.assertFalse(self.engine.obstacles[0].get_top_rect())
+        self.assertTrue(self.engine.obstacles[0].get_bottom_rect())
+        self.assertGreater(self.engine.shield_hit_frames, 0)
 
         self.engine.update()
         self.assertFalse(self.engine.game_over)
 
-    def test_reentry_after_separation_is_lethal_without_rearming(self):
+    def test_next_uncleared_obstacle_is_lethal_without_rearming(self):
         self.engine.obstacles = [self.obstacle()]
         self.engine.helicopter.y = 100
         self.engine.handle_keydown(pygame.K_SPACE)
         self.engine.update()
         self.assertFalse(self.engine.game_over)
 
-        self.engine.obstacles[0].x = 500
-        self.engine.update()
-        self.engine.obstacles[0].x = 100
+        self.engine.obstacles.append(self.obstacle())
         self.engine.update()
         self.assertTrue(self.engine.game_over)
 
@@ -207,6 +208,58 @@ class GameEngineTests(unittest.TestCase):
         self.assertFalse(self.engine.game_over)
         self.assertFalse(self.engine.helicopter.shield_active)
 
+    def test_bottom_shield_hit_does_not_clear_the_top_wall(self):
+        wall = self.obstacle()
+        self.engine.obstacles = [wall]
+        self.engine.helicopter.y = 400
+        self.engine.handle_keydown(pygame.K_SPACE)
+        self.engine.update()
+        self.assertFalse(self.engine.game_over)
+        self.assertTrue(wall.get_top_rect())
+        self.assertFalse(wall.get_bottom_rect())
+        self.assertFalse(self.engine.helicopter.shield_active)
+
+    def test_long_held_keys_cannot_leave_either_screen_edge(self):
+        for direction in (pygame.K_UP, pygame.K_DOWN, pygame.K_UP):
+            for _ in range(600):
+                self.engine.handle_input(keys(direction))
+                self.engine.update()
+                body = self.engine.helicopter.get_rect()
+                self.assertGreaterEqual(body.top, 0)
+                self.assertLessEqual(body.bottom, HEIGHT)
+
+    def test_unprotected_scrolling_wall_cannot_pass_through_player(self):
+        self.engine.helicopter.y = 100
+        wall = self.obstacle()
+        wall.x = 300
+        wall.speed = SCROLL_SPEED
+        self.engine.obstacles = [wall]
+        for _ in range(100):
+            self.engine.update()
+            if self.engine.game_over:
+                break
+        self.assertTrue(self.engine.game_over)
+        self.assertGreaterEqual(wall.get_top_rect().right, self.engine.helicopter.get_rect().left)
+        distance = self.engine.distance
+        x = wall.x
+        for _ in range(100):
+            self.engine.update()
+        self.assertEqual(wall.x, x)
+        self.assertEqual(self.engine.distance, distance)
+
+    def test_entire_gap_is_safe_and_adjacent_pixels_are_lethal(self):
+        # Exhaustively test all 477 legal vertical positions at horizontal contact.
+        for y in range(12, HEIGHT - 11):
+            with self.subTest(y=y):
+                engine = GameEngine()
+                engine.frames_until_spawn = 100000
+                wall = self.obstacle()
+                engine.obstacles = [wall]
+                engine.helicopter.y = y
+                engine.update()
+                body = engine.helicopter.get_rect()
+                inside_gap = body.top > wall.get_top_rect().bottom and body.bottom < wall.get_bottom_rect().top
+                self.assertEqual(engine.game_over, not inside_gap)
 
 if __name__ == "__main__":
     unittest.main()
