@@ -1,45 +1,31 @@
-# Lab 4 Vibe Coding Helicopter
+# Lab 4: Vibe Coding - Helicopter
 
 Arjun Srikanth | PES1UG24AM920 | Section H
 
-Assigned repository: https://github.com/SETAPESU26/08_helicopter
-Original starter commit: `4402faa66a1f3ee701c1dbdece783a08bc8c241e`.
+Assigned starter: [SETAPESU26/08_helicopter](https://github.com/SETAPESU26/08_helicopter).
+Original commit: `4402faa66a1f3ee701c1dbdece783a08bc8c241e`.
 
-## Is this the assigned game?
+## Deliverables
 
-Yes. The [official Section H assignment spreadsheet](https://github.com/RuthuHK/software-engineering-lab-material_sec_h/blob/main/lab4/Section_H_Vibe_Coding_Assignments.xlsx)
-lists `PES1UG24AM920`, `ARJUN SRIKANTH`, game number `8`, and
-`https://github.com/SETAPESU26/08_helicopter` in sheet `5-H`, cells B60:E60.
+- [before.mp4](before.mp4): 10 seconds of the unchanged starter.
+- [after.mp4](after.mp4): 10 seconds showing the completed game.
+- [helicopter/](helicopter/): updated Python source and behavioral tests.
+- [PES1UG24AM920.pdf](PES1UG24AM920.pdf): Lab 4 conversation export.
+- [Chat/LLM page](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/blob/main/Lab-4/chat_history.md): the same conversation in readable form.
 
-The starter calls the player a helicopter but draws it as a dark rounded
-rectangle, not a helicopter picture. Its [original renderer](https://github.com/SETAPESU26/08_helicopter/blob/4402faa66a1f3ee701c1dbdece783a08bc8c241e/helicopter/game/renderer.py)
-uses `pygame.draw.rect(..., helicopter.get_rect(), border_radius=4)`.
-There are no helicopter image assets in the starter. The before and after games
-retain that provided appearance; adding helicopter artwork is not an assigned task.
-This is the assigned side-scrolling Helicopter game, not a replacement Flappy Bird project.
+## Completed tasks
 
-## Required submission files
+1. Cap vertical speed, reverse direction immediately, and keep the full player body within both screen boundaries.
+2. Detect contact with either obstacle wall and show game over; passage through a clear gap remains safe.
+3. Show distance during play and the final distance at game over; restart resets it to zero.
+4. Activate a visible shield that absorbs one obstacle hit and immediately turns off.
 
-- `before.mp4`: 10 seconds of the unchanged starter, captured from its native
-  Pygame window. Direction reversal lags and the helicopter leaves the screen.
-- `after.mp4`: 10 seconds demonstrating the completed game.
-- `helicopter/`: updated Python source with separate commits for Tasks 1-4.
-- `PES1UG24AM920.pdf`: actual Lab 4 conversation export.
-- `chat_history.md`: readable complete transcript page, linked below as requested
-  by the starter README.
-
-`README.md`, `STARTER_README.md`, `STATE.md`, and the behavioral tests support
-the submission and future work; they are not additional game features.
-
-The course handout is at
-https://github.com/RuthuHK/software-engineering-lab-material_sec_h/blob/main/lab4/Lab_4_VibeCoding_Student_handout.pdf.
-The assignment spreadsheet maps PES1UG24AM920 to game number 8, this Helicopter game.
-`STARTER_README.md` preserves the instructor's complete task specifications.
+Separate task commits: movement `f18e311`, collision `8af216a`,
+distance `76bacf6`, and shield `c4eeefa`. Subsequent corrections keep the solution minimal.
 
 ## Run
 
-Python 3.10 or newer is required. Tested with Python 3.12 and Pygame 2.6.1;
-Python 3.12 is recommended for the setup commands below.
+Tested with Python 3.12 and Pygame 2.6.1.
 
 ```sh
 cd Lab-4/helicopter
@@ -49,79 +35,23 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-## Tasks
+Up/Down moves the player. Space activates the shield. R restarts after game over.
+A shielded hit consumes protection and removes the hit obstacle; the next
+unshielded hit ends the game.
 
-The starter specifies one movement/boundary bug and three new features:
-
-1. Fix unlimited vertical speed and missing bottom boundary.
-2. Add wall collision and a game-over display.
-3. Add distance scoring with reset on a new game.
-4. Add a visibly active shield that absorbs exactly one contact.
-
-Task 4 explicitly requires the shield, so it must stay. Space activates it;
-the blue outline and `Shield: ON` show protection. One obstacle hit consumes it
-immediately, the outline disappears, and the HUD changes to `Shield: OFF`.
-The next obstacle hit ends the game unless the player activates the shield again.
-Removing the hit obstacle is this implementation's simple way to resolve the
-protected contact without appearing to fly through an unchanged solid wall;
-the task requires one-hit protection, not that particular removal strategy.
-
-All four tasks are implemented in separate commits:
-
-| Task | Commit | Result |
-| --- | --- | --- |
-| Original starter and evidence | `ad2ae50` | Unchanged source and before video |
-| 1 Movement and boundaries | `f18e311` | Speed cap, immediate reversal, complete body containment |
-| 2 Collision and game over | `8af216a` | Either wall, exact edge contact, restart with R |
-| 3 Distance scoring | `76bacf6` | Pixels traveled, final distance, reset on new game |
-| 4 Shield | `c4eeefa` | Space activates, blue outline, one contact absorbed |
-
-Feedback corrections keep the shield minimal: consume it and remove the hit
-obstacle. No per-wall destruction state, contact immunity or hit timer is needed.
-
-## Controls and behavior
-
-- Up and Down move the helicopter; both together act as released input.
-- Space activates the shield. The blue outline and HUD show when it is active.
-- One obstacle hit consumes the shield and removes that obstacle. The next
-  obstacle is lethal unless Space is pressed again.
-- The helicopter's entire body stays in the 700 x 500 playfield. A separate
-  60-pixel HUD below it keeps the boundary, distance and shield status visible.
-- R starts a fresh game after game over. Distance is measured in scrolled pixels.
-- Close the window to exit.
-
-## Verification and evidence
+## Verification
 
 ```sh
-cd Lab-4/helicopter
 python -m unittest discover -s tests -v
 ```
 
-All 18 deterministic behavioral tests pass. Checks cover velocity caps, immediate
-reversal, both screen edges, exact wall contact, safe gap margins, frozen game
-over, restart, distance, single-obstacle shield consumption and reactivation. The tests
-include all 477 legal vertical positions at wall contact and 1,800 held-key frames.
+All 18 behavioral tests pass. Both videos are genuine native-window recordings,
+exactly 10.000 seconds at 30 fps. The after demonstration uses obstacle seed 3;
+normal play retains random obstacles. Gameplay and timing are not bypassed.
 
-Both MP4 videos are native macOS screen recordings of the running Pygame window,
-encoded at 30 fps with their original timing and exactly 10.000 seconds duration.
-The after video uses a reproducible random obstacle seed (3) and ordinary native
-keyboard input. No gameplay is bypassed, sped up, or replaced with drawn evidence.
-The live game retains random obstacles on normal launch.
+The original starter draws the helicopter as a dark rounded rectangle.
+A helicopter image is not supplied or required. The shield is explicitly required
+by Task 4 of the [starter instructions](https://github.com/SETAPESU26/08_helicopter#tasks-to-complete).
 
-The corrected after video shows the helicopter held against the bottom boundary,
-immediate reversal upward, a safe gap crossing without a shield, a shielded
-hit that removes the hit obstacle and turns the shield off, a subsequent solid-wall
-collision with a frozen final distance, and a restart. The final encoded video
-was decoded without errors and inspected around the collision transitions.
-
-## Chat link
-
-[Complete Lab 4 user and assistant transcript](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/blob/main/Lab-4/chat_history.md)
-
-The PDF and Markdown export contain the real visible conversation beginning at
-the Lab 4 request through their stated export time. Internal reasoning and tool
-logs are excluded. The user selected this Lab 4-only transcript instead of sharing
-earlier conversation content.
-
-No pull request is created against the instructor's repository. Accepted Labs 1-3
-remain identical to commit `4223a00`.
+Submitted files follow the [Lab 4 handout](https://github.com/RuthuHK/software-engineering-lab-material_sec_h/blob/main/lab4/Lab_4_VibeCoding_Student_handout.pdf).
+No pull request is made to SETAPESU26. Accepted Labs 1-3 are unchanged.
