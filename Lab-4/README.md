@@ -49,14 +49,17 @@ All four tasks are implemented in separate commits:
 | 2 Collision and game over | `8af216a` | Either wall, exact edge contact, restart with R |
 | 3 Distance scoring | `76bacf6` | Pixels traveled, final distance, reset on new game |
 | 4 Shield | `c4eeefa` | Space activates, blue outline, one contact absorbed |
+| Feedback correction | `480f4ab` | Only the shield-hit wall is visibly cleared; HUD stays outside the playfield |
 
 ## Controls and behavior
 
 - Up and Down move the helicopter; both together act as released input.
 - Space activates the shield. The blue outline and HUD show when it is active.
-- One wall contact consumes the shield. Overlap during that same continuous
-  contact does not count as repeated hits. A new wall or separation and re-entry
-  is lethal unless the player presses Space again.
+- One wall contact immediately consumes the shield and removes only the struck
+  top or bottom wall, with a visible "SHIELD HIT" message. The other wall stays
+  solid. Any remaining solid wall is lethal unless Space is pressed again.
+- The helicopter's entire body stays in the 700 x 500 playfield. A separate
+  100-pixel HUD below it keeps the boundary, distance and shield status visible.
 - R starts a fresh game after game over. Distance is measured in scrolled pixels.
 - Close the window to exit.
 
@@ -67,15 +70,23 @@ cd Lab-4/helicopter
 python -m unittest discover -s tests -v
 ```
 
-All 14 deterministic behavioral tests pass. Checks cover velocity caps, immediate
+All 18 deterministic behavioral tests pass. Checks cover velocity caps, immediate
 reversal, both screen edges, exact wall contact, safe gap margins, frozen game
-over, restart, distance, shield consumption, re-entry and reactivation.
+over, restart, distance, one-wall shield consumption and reactivation. The tests
+include all 477 legal vertical positions at wall contact and 1,800 held-key frames.
+A separate read-only review passed 20 seeded simulations with rendering.
 
 Both MP4 videos are native macOS screen recordings of the running Pygame window,
 encoded at 30 fps with their original timing and exactly 10.000 seconds duration.
 The after video uses a reproducible random obstacle seed (3) and ordinary native
 keyboard input. No gameplay is bypassed, sped up, or replaced with drawn evidence.
 The live game retains random obstacles on normal launch.
+
+The corrected after video shows the helicopter held against the bottom boundary,
+immediate reversal upward, a safe gap crossing without a shield, a shielded
+hit that visibly clears one wall and turns the shield off, a subsequent solid-wall
+collision with a frozen final distance, and a restart. The final encoded video
+was decoded without errors and inspected around the collision transitions.
 
 ## Chat link
 

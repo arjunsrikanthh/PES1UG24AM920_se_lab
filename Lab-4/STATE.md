@@ -47,11 +47,36 @@ the handout prohibits a PR to SETAPESU26.
 
 ## Next action
 
-Lab 4 is complete and published. Await the user's play-through or faculty feedback.
-If changes are requested, start from .lab4-work/submission and update this file;
-keep the accepted Labs 1-3 frozen. No implementation or submission task remains.
+Correction code, native video and refreshed transcript are verified. Publish the
+revised package, verify remote hashes and synchronize the local final folder.
+Keep accepted Labs 1-3 frozen.
 
 ## Verified evidence
+
+Current correction evidence:
+- Old shield behavior granted immunity during continued contact with a solid wall;
+  user correctly flagged its confusing visible pass-through.
+- Replaced it with explicit single-wall destruction on shield impact, immediate
+  shield consumption, and a one-second hit message. No solid-wall immunity remains.
+- Moved HUD below the playfield so the helicopter is visible at both boundaries.
+- 18 tests pass, including every one of 477 legal vertical positions at wall contact,
+  unprotected scrolling wall blockage, 1,800 held-key frames, and top/bottom shield hits.
+- Correction commit: 480f4ab (separate from the original four task commits).
+- Read-only independent review passed 20 seeded simulations with rendering.
+- Five revised native recording trials inspected; final take is trial 5.
+  Other takes remain private and are not submission artifacts.
+- Final after.mp4: 10.000 seconds, 300 frames, 30 fps, H.264, 1400 x 1264.
+  Full decode passes. Genuine native window and keyboard input, original timing;
+  seeded obstacles (3) for the demonstration only. Normal launch stays random.
+- Final take shows bottom containment, immediate upward reversal, safe unshielded
+  gap crossing, visibly cleared shield-hit wall with immediate shield OFF, next
+  solid wall causing game over at 1122 px, and restart with reset distance.
+- Transcript: 22 actual visible Lab 4 entries, exported 2026-10-07 13:44:40 IST;
+  four-page PDF rendered and every page visually inspected. Automated context and
+  earlier lab discussion excluded; media/app links are rendered as readable links.
+- Revised documentation and package are not yet published.
+
+Earlier publication evidence (superseded after video and shield model):
 
 - Starter commit: 4402faa66a1f3ee701c1dbdece783a08bc8c241e (unmodified).
 - Python environment: .lab4-work/venv (Python 3.12, Pygame 2.6.1).
@@ -60,15 +85,9 @@ keep the accepted Labs 1-3 frozen. No implementation or submission task remains.
 - Four deterministic movement tests pass: speed, reversal, bounds, release drag.
 - Task 1 commit: f18e311; Task 2: 8af216a; Task 3: 76bacf6.
 - Task 4 commit: c4eeefa.
-- Full suite: 14 tests pass (movement, wall/gap contact, freeze/reset, distance,
-  single contact shield, reentry, second wall, reactivation).
-- after.mp4: exactly 10.000 seconds; native screen recording, original speed,
-  seeded obstacle sequence (seed 3), standard Up/Down/Space/R input only.
-  Shows containment, shield on/absorption/off, a second lethal wall, final score,
-  restart with reset distance, and safe passage through the next gap.
-- Read-only independent review found no concrete implementation bugs.
+- Original shield model and after video are superseded by the correction above.
 - PDF transcript: PES1UG24AM920.pdf, actual Lab 4 user/assistant messages only.
-- Final PDF: two pages, visually inspected; transcript contains 10 actual visible
+- Earlier PDF: two pages, visually inspected; transcript contains 10 actual visible
   conversation entries through 2026-10-07 13:21:37 IST.
 - Submission package commit dae314b0defcf8b72910ce6f7fb7af5b2ee79e68 pushed
   successfully to personal main. Remote SHA matched; GitHub lists all Lab-4 files.
@@ -96,4 +115,4 @@ User selected a Lab 4-only transcript page on GitHub; do not share the full chat
 
 ## Blockers
 
-None established. Native game recording and chat export must still be verified.
+None. Only publication verification and final-package synchronization remain.
