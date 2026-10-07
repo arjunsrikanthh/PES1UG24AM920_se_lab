@@ -29,3 +29,12 @@ def draw_banner(surface, font, text):
     surf = font.render(text, True, (180, 40, 40))
     rect = surf.get_rect(center=(surface.get_width() // 2, surface.get_height() // 2))
     surface.blit(surf, rect)
+
+
+def draw_game_over(surface, font):
+    veil = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
+    veil.fill((10, 20, 30, 165))
+    surface.blit(veil, (0, 0))
+    for offset, text in ((-30, 'GAME OVER'), (20, 'Press R to restart')):
+        label = font.render(text, True, (255, 255, 255))
+        surface.blit(label, label.get_rect(center=(WIDTH // 2, HEIGHT // 2 + offset)))

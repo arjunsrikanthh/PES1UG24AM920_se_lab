@@ -1,14 +1,11 @@
 """
 GameEngine: owns the helicopter and all obstacles.
 
-Starter version: the helicopter moves and obstacles scroll by, but
-there's no collision detection at all yet (the helicopter can fly
-straight through obstacles harmlessly), no scoring, and no shield.
-That's Tasks 2, 3, and 4. Movement also has known bugs (see
-game/helicopter.py) that Task 1 asks you to fix.
+Movement and wall contact belong here; presentation stays in renderer.
 """
 
 import random
+import pygame
 
 from game.helicopter import Helicopter
 from game.obstacle import Obstacle
@@ -25,6 +22,7 @@ class GameEngine:
         self.helicopter = Helicopter(x=100, y=HEIGHT / 2)
         self.obstacles = []
         self.frames_until_spawn = 0
+        self.game_over = False
 
     def _spawn_obstacle(self):
         margin = 60
@@ -35,12 +33,28 @@ class GameEngine:
         ))
 
     def handle_input(self, keys_pressed):
-        self.helicopter.handle_input(keys_pressed)
+        if not self.game_over:
+            self.helicopter.handle_input(keys_pressed)
 
     def handle_keydown(self, key):
-        pass
+        if key == pygame.K_r and self.game_over:
+            self.__init__()
+
+    def _wall_contacts(self):
+        body = self.helicopter.get_rect()
+        contacts = set()
+        for obstacle in self.obstacles:
+            for side, wall in (('top', obstacle.get_top_rect()),
+                               ('bottom', obstacle.get_bottom_rect())):
+                # Rect.colliderect excludes exact edges; the task says touching.
+                if (body.left <= wall.right and body.right >= wall.left
+                        and body.top <= wall.bottom and body.bottom >= wall.top):
+                    contacts.add((obstacle, side))
+        return contacts
 
     def update(self):
+        if self.game_over:
+            return
         self.helicopter.update(HEIGHT)
 
         self.frames_until_spawn -= 1
@@ -51,7 +65,12 @@ class GameEngine:
         for obstacle in self.obstacles:
             obstacle.update()
         self.obstacles = [o for o in self.obstacles if not o.is_off_screen()]
+        if self._wall_contacts():
+            self.game_over = True
 
     def draw(self, surface, font):
         from game import renderer
         renderer.draw_scene(surface, self.helicopter, self.obstacles)
+        renderer.draw_text(surface, font, 'Up / Down: move', (14, 14))
+        if self.game_over:
+            renderer.draw_game_over(surface, font)
