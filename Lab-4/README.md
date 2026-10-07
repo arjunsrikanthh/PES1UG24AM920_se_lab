@@ -5,19 +5,35 @@ Arjun Srikanth | PES1UG24AM920 | Section H
 Assigned repository: https://github.com/SETAPESU26/08_helicopter
 Original starter commit: `4402faa66a1f3ee701c1dbdece783a08bc8c241e`.
 
-## Submission files
+## Is this the assigned game?
+
+Yes. The [official Section H assignment spreadsheet](https://github.com/RuthuHK/software-engineering-lab-material_sec_h/blob/main/lab4/Section_H_Vibe_Coding_Assignments.xlsx)
+lists `PES1UG24AM920`, `ARJUN SRIKANTH`, game number `8`, and
+`https://github.com/SETAPESU26/08_helicopter` in sheet `5-H`, cells B60:E60.
+
+The starter calls the player a helicopter but draws it as a dark rounded
+rectangle, not a helicopter picture. Its [original renderer](https://github.com/SETAPESU26/08_helicopter/blob/4402faa66a1f3ee701c1dbdece783a08bc8c241e/helicopter/game/renderer.py)
+uses `pygame.draw.rect(..., helicopter.get_rect(), border_radius=4)`.
+There are no helicopter image assets in the starter. The before and after games
+retain that provided appearance; adding helicopter artwork is not an assigned task.
+This is the assigned side-scrolling Helicopter game, not a replacement Flappy Bird project.
+
+## Required submission files
 
 - `before.mp4`: 10 seconds of the unchanged starter, captured from its native
   Pygame window. Direction reversal lags and the helicopter leaves the screen.
 - `after.mp4`: 10 seconds demonstrating the completed game.
 - `helicopter/`: updated Python source with separate commits for Tasks 1-4.
 - `PES1UG24AM920.pdf`: actual Lab 4 conversation export.
-- `chat_history.md`: readable transcript page.
-- `STATE.md`: durable progress and resume notes.
+- `chat_history.md`: readable complete transcript page, linked below as requested
+  by the starter README.
+
+`README.md`, `STARTER_README.md`, `STATE.md`, and the behavioral tests support
+the submission and future work; they are not additional game features.
 
 The course handout is at
 https://github.com/RuthuHK/software-engineering-lab-material_sec_h/blob/main/lab4/Lab_4_VibeCoding_Student_handout.pdf.
-The assignment spreadsheet maps PES1UG24AM920 to serial 8, this Helicopter game.
+The assignment spreadsheet maps PES1UG24AM920 to game number 8, this Helicopter game.
 `STARTER_README.md` preserves the instructor's complete task specifications.
 
 ## Run
@@ -35,10 +51,20 @@ python main.py
 
 ## Tasks
 
+The starter specifies one movement/boundary bug and three new features:
+
 1. Fix unlimited vertical speed and missing bottom boundary.
 2. Add wall collision and a game-over display.
 3. Add distance scoring with reset on a new game.
 4. Add a visibly active shield that absorbs exactly one contact.
+
+Task 4 explicitly requires the shield, so it must stay. Space activates it;
+the blue outline and `Shield: ON` show protection. One obstacle hit consumes it
+immediately, the outline disappears, and the HUD changes to `Shield: OFF`.
+The next obstacle hit ends the game unless the player activates the shield again.
+Removing the hit obstacle is this implementation's simple way to resolve the
+protected contact without appearing to fly through an unchanged solid wall;
+the task requires one-hit protection, not that particular removal strategy.
 
 All four tasks are implemented in separate commits:
 

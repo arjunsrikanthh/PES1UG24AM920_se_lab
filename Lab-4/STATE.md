@@ -13,7 +13,9 @@ Labs 1-3 earned full marks and are accepted; their submitted artifacts are froze
 - Accepted Labs 1-3 commit: 4223a00bcd1beb6796362c5720c42ffecb60633a
 - Course materials: https://github.com/RuthuHK/software-engineering-lab-material_sec_h
 - Assigned Lab 4 starter: https://github.com/SETAPESU26/08_helicopter
-- Assignment spreadsheet: course repository lab4/Section_H_Vibe_Coding_Assignments.xlsx, row for PES1UG24AM920, serial 8.
+- Assignment spreadsheet: course repository lab4/Section_H_Vibe_Coding_Assignments.xlsx,
+  sheet 5-H, B60:E60: PES1UG24AM920, ARJUN SRIKANTH, game number 8,
+  https://github.com/SETAPESU26/08_helicopter. Student list serial is 57, not 8.
 
 ## Workspace cautions
 
@@ -48,10 +50,16 @@ the handout prohibits a PR to SETAPESU26.
 
 ## Next action
 
-User requested a minimal solution and playable before/after versions. Simplification
-and matching video/transcript are verified and published. Both native games are
-open for manual play. Await user feedback; keep any further changes focused on
-the four assigned tasks. The local final folder mirrors tracked Lab-4 files.
+User asked whether the rectangle is the assigned helicopter, whether the shield
+belongs in the game, and to refresh all deliverables. Rechecked the official
+assignment spreadsheet, complete one-page handout, and unchanged starter source.
+The rectangle is the provided player rendering; a helicopter sprite is not required.
+The shield is explicitly required by Task 4 and must remain. README and actual
+chat PDF/Markdown are refreshed; verified matching code/videos are retained.
+Publish this source-audit refresh, verify remote content and synchronize the local
+final package, then await user feedback.
+Keep further changes focused on the four assigned tasks. Native before/after games
+were launched previously; do not assume they remain open on resume.
 No LMS submission or grading is claimed here.
 Keep accepted Labs 1-3 frozen. On resuming, inspect this file, personal main and
 the working checkout before making changes; do not use the obsolete outer origin.
@@ -59,6 +67,15 @@ the working checkout before making changes; do not use the obsolete outer origin
 ## Verified evidence
 
 Current simplified version:
+- Source audit: assignment spreadsheet blob a84e4b310245c3ffa66e26177fb1d5bb87d178ed;
+  handout blob 6f68d2bf24e28038a982836021e446a1e452e65f. The handout was read
+  completely and its single page rendered and inspected. Official sheet 5-H B60:E60
+  confirms the assigned game. Starter main still equals 4402faa66a1f3ee701c1dbdece783a08bc8c241e.
+- Original renderer uses pygame.draw.rect with border_radius=4 for the helicopter;
+  no image assets are supplied. Keep the original player appearance.
+- Shield is mandatory Task 4: visible activation, one absorbed hit, immediate OFF,
+  vulnerable afterward until reactivated. Removing the hit obstacle is our minimal
+  implementation choice, not an explicit instructor requirement.
 - Removed per-wall destruction state, contact-set helper and hit timer. A shield
   hit consumes the shield and removes that obstacle; the next obstacle is lethal.
 - 33 fewer runtime lines than the previous version. Obstacle class is identical
@@ -69,12 +86,16 @@ Current simplified version:
   Full decode passes; visually inspected the complete ten seconds. Original before
   video remains unchanged. Demonstrates bottom containment, reversal, safe gap,
   one shield hit, next lethal wall and restart. No gameplay or timing is bypassed.
-- Transcript: 29 visible entries, five pages, exported 2026-10-07 13:56:51 IST.
-  Every rendered page inspected. Actual Lab 4 conversation, no invented prompts.
+- Transcript: 35 visible entries, six pages, exported 2026-10-07 14:07:57 IST.
+  Includes the source/provenance and shield clarification. Every rendered page
+  inspected. Actual visible Lab 4 conversation only, no invented prompts.
 - Manual play: BEFORE - Original lab starter and AFTER - Fixed lab game launched
   with native titles and positions. Up/Down in both; Space shield and R restart
   after game over in the completed game. On resume, do not assume they still run.
-- Simplification package commit: 92b5f3a. Published Lab-4 tree matches local HEAD.
+- Simplification package commit: 92b5f3a; preceding state publication: 40ebe84.
+  Source audit changes documentation/transcripts only; gameplay and videos unchanged.
+  All 18 behavioral tests pass again. Both MP4s remain exactly 10.000 seconds.
+  Before video blob: cf6dda37c02635bb57798d01ec9f8fb6c66d82dd.
   After video blob: 1cae0c0caefdd0749ebb07848c72600dbb296a7b.
   Labs 1-3 remain identical to accepted 4223a00.
 
@@ -146,4 +167,5 @@ User selected a Lab 4-only transcript page on GitHub; do not share the full chat
 
 ## Blockers
 
-None. Both playable games are open and the minimal submission is published.
+None. The assigned source, required shield and four-task scope are confirmed.
+Documentation/transcript refresh is ready for publication; do not claim LMS submission.
