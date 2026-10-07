@@ -1,9 +1,9 @@
 """
-Helicopter Game (Lab Starter)
+Helicopter Game (Lab 4)
 
 Run with:  python3 main.py
 
-Controls: Up/Down arrows to move.
+Controls: Up/Down arrows to move, Space for a shield, R to restart after game over.
 """
 
 import pygame
@@ -28,6 +28,8 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 engine.handle_keydown(event.key)
 
+        if not running:
+            break
         keys = pygame.key.get_pressed()
         engine.handle_input(keys)
         engine.update()

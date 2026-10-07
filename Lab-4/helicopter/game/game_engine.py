@@ -24,6 +24,7 @@ class GameEngine:
         self.frames_until_spawn = 0
         self.game_over = False
         self.distance = 0.0
+        self._absorbed_contacts = set()
 
     def _spawn_obstacle(self):
         margin = 60
@@ -40,6 +41,8 @@ class GameEngine:
     def handle_keydown(self, key):
         if key == pygame.K_r and self.game_over:
             self.__init__()
+        elif key == pygame.K_SPACE and not self.game_over:
+            self.helicopter.shield_active = True
 
     def _wall_contacts(self):
         body = self.helicopter.get_rect()
@@ -67,13 +70,23 @@ class GameEngine:
             obstacle.update()
         self.distance += SCROLL_SPEED
         self.obstacles = [o for o in self.obstacles if not o.is_off_screen()]
-        if self._wall_contacts():
-            self.game_over = True
+        contacts = self._wall_contacts()
+        # One collision is a continuous contact, rather than every overlap frame.
+        self._absorbed_contacts.intersection_update(contacts)
+        for contact in contacts - self._absorbed_contacts:
+            if self.helicopter.shield_active:
+                self.helicopter.shield_active = False
+                self._absorbed_contacts.add(contact)
+            else:
+                self.game_over = True
+                break
 
     def draw(self, surface, font):
         from game import renderer
         renderer.draw_scene(surface, self.helicopter, self.obstacles)
         renderer.draw_text(surface, font, f'Distance: {int(self.distance)} px', (14, 14))
-        renderer.draw_text(surface, font, 'Up / Down: move', (14, HEIGHT - 34))
+        shield_status = 'ON (1 hit)' if self.helicopter.shield_active else 'OFF'
+        renderer.draw_text(surface, font, f'Shield: {shield_status}', (400, 14))
+        renderer.draw_text(surface, font, 'Up / Down: move   Space: shield   R: restart', (14, HEIGHT - 34))
         if self.game_over:
             renderer.draw_game_over(surface, font, self.distance)

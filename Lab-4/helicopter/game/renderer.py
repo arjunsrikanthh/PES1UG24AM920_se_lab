@@ -19,6 +19,9 @@ def draw_scene(surface, helicopter, obstacles):
         pygame.draw.rect(surface, COLOR_OBSTACLE, obstacle.get_top_rect())
         pygame.draw.rect(surface, COLOR_OBSTACLE, obstacle.get_bottom_rect())
     pygame.draw.rect(surface, COLOR_HELI, helicopter.get_rect(), border_radius=4)
+    if helicopter.shield_active:
+        shield_rect = helicopter.get_rect().inflate(14, 14)
+        pygame.draw.ellipse(surface, (20, 90, 220), shield_rect, 3)
 
 
 def draw_text(surface, font, text, pos, color=COLOR_TEXT):

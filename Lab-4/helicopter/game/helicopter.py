@@ -17,6 +17,7 @@ class Helicopter:
         self.width = width
         self.height = height
         self.vy = 0.0
+        self.shield_active = False
 
     def handle_input(self, keys_pressed):
         direction = int(bool(keys_pressed[pygame.K_DOWN])) - int(bool(keys_pressed[pygame.K_UP]))
