@@ -10,7 +10,7 @@ Original commit: `4402faa66a1f3ee701c1dbdece783a08bc8c241e`.
 - [before.mp4](before.mp4): 10 seconds of the unchanged starter.
 - [after.mp4](after.mp4): 10 seconds showing the completed game.
 - [helicopter/](helicopter/): updated Python source and behavioral tests.
-- [PES1UG24AM920.pdf](PES1UG24AM920.pdf): supplied Lab 4 conversation PDF, copied unchanged.
+- [PES1UG24AM920.pdf](PES1UG24AM920.pdf): Chat History.
 
 [Conversation page - GitHub PDF preview](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/blob/main/Lab-4/PES1UG24AM920.pdf).
 
