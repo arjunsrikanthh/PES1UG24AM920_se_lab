@@ -27,5 +27,4 @@ Assigned Vibe Coding project: [08 Helicopter](https://github.com/SETAPESU26/08_h
 - [Lab 4 submission and run instructions](Lab-4/README.md)
 - [Before video](Lab-4/before.mp4) and [after video](Lab-4/after.mp4)
 - [Updated Python code](Lab-4/helicopter)
-- [Chat history PDF](Lab-4/PES1UG24AM920.pdf) and [transcript page](Lab-4/chat_history.md)
-- [Current Lab 4 state](Lab-4/STATE.md)
+- [Chat history PDF](Lab-4/PES1UG24AM920.pdf)
