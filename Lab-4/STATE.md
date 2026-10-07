@@ -43,12 +43,13 @@ the handout prohibits a PR to SETAPESU26.
 - [x] Implement and commit tasks 1-4 separately, with behavioral checks.
 - [x] Record and verify completed 10-second gameplay video.
 - [x] Export actual Lab 4 conversation and package deliverables.
-- [ ] Push personal repository and verify remote content and accepted-file hashes.
+- [x] Push personal repository and verify remote content and accepted-file hashes.
 
 ## Next action
 
-Implementation and evidence complete. Commit the final package, push the personal
-repository, verify remote commit/files, and mark publication complete here.
+Lab 4 is complete and published. Await the user's play-through or faculty feedback.
+If changes are requested, start from .lab4-work/submission and update this file;
+keep the accepted Labs 1-3 frozen. No implementation or submission task remains.
 
 ## Verified evidence
 
@@ -67,7 +68,21 @@ repository, verify remote commit/files, and mark publication complete here.
   restart with reset distance, and safe passage through the next gap.
 - Read-only independent review found no concrete implementation bugs.
 - PDF transcript: PES1UG24AM920.pdf, actual Lab 4 user/assistant messages only.
-- Both PDF pages visually inspected; final transcript will be refreshed before push.
+- Final PDF: two pages, visually inspected; transcript contains 10 actual visible
+  conversation entries through 2026-10-07 13:21:37 IST.
+- Submission package commit dae314b0defcf8b72910ce6f7fb7af5b2ee79e68 pushed
+  successfully to personal main. Remote SHA matched; GitHub lists all Lab-4 files.
+- Accepted Labs 1-3 compare identically against commit 4223a00 (git diff exit 0).
+
+## Deliverable locations
+
+- Published: https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/tree/main/Lab-4
+- Chat page: https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/blob/main/Lab-4/chat_history.md
+- Working checkout: .lab4-work/submission (the outer origin remains obsolete).
+- Local final package: /Users/arjun/Downloads/sem5/01_Subjects/Software_Engineering/05_Labs/Lab_04
+- Run locally: .lab4-work/venv/bin/python .lab4-work/submission/Lab-4/helicopter/main.py
+  (set working directory to the helicopter folder, or launch from the outer workspace;
+  main.py resolves its game package from its own directory).
 
 ## Decisions
 
