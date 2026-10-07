@@ -56,8 +56,8 @@ assignment spreadsheet, complete one-page handout, and unchanged starter source.
 The rectangle is the provided player rendering; a helicopter sprite is not required.
 The shield is explicitly required by Task 4 and must remain. README and actual
 chat PDF/Markdown are refreshed; verified matching code/videos are retained.
-Publish this source-audit refresh, verify remote content and synchronize the local
-final package, then await user feedback.
+The source-audit refresh is published and verified; the local final package matches
+all 15 tracked Lab-4 files. Await user feedback or the student's submission/viva.
 Keep further changes focused on the four assigned tasks. Native before/after games
 were launched previously; do not assume they remain open on resume.
 No LMS submission or grading is claimed here.
@@ -98,6 +98,11 @@ Current simplified version:
   Before video blob: cf6dda37c02635bb57798d01ec9f8fb6c66d82dd.
   After video blob: 1cae0c0caefdd0749ebb07848c72600dbb296a7b.
   Labs 1-3 remain identical to accepted 4223a00.
+- Source-audit publication: da5c18532628abc51fb636f7245ca21c8f7a294d. Remote commit
+  and Lab-4 tree d15ee86234e1c719ebc3fa64e582b92ca8c16422 matched the verified
+  checkout; all 15 tracked files matched the local final package. Gameplay source,
+  original starter README and both video blobs are unchanged from 40ebe84.
+  This subsequent state-only checkpoint records those verified results.
 
 Previous publication evidence (superseded locally by the simplification above):
 - Old shield behavior granted immunity during continued contact with a solid wall;
@@ -168,4 +173,4 @@ User selected a Lab 4-only transcript page on GitHub; do not share the full chat
 ## Blockers
 
 None. The assigned source, required shield and four-task scope are confirmed.
-Documentation/transcript refresh is ready for publication; do not claim LMS submission.
+Documentation/transcript refresh is published and synchronized; no LMS submission is claimed.
