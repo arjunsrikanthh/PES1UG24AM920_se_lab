@@ -1,1 +1,0 @@
-"""Incident escalation lab implementation."""
