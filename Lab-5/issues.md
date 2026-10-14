@@ -1,19 +1,27 @@
 # Lab 5 — Static-analysis findings
 
-Assigned starter: [SETAPESU26/L5_58_support-ticket-tracker](https://github.com/SETAPESU26/L5_58_support-ticket-tracker). The original source is preserved under `support_ticket_tracker_original.py.txt`. Line numbers refer to that file.
+**Assigned source:** [SETAPESU26/L5_58_support-ticket-tracker/support_ticket_tracker.py](https://github.com/SETAPESU26/L5_58_support-ticket-tracker/blob/main/support_ticket_tracker.py).
 
-| Finding | Source / original line | Issue | Correction |
+Original line numbers below refer to the faculty's assigned script, **not** to the corrected version. The original source is available in the linked starter repository and the [verification artifact](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/actions/runs/38530383574).
+
+| Finding | Tool / original line | Explanation | Fix |
 | --- | --- | --- | --- |
-| Mutable audit default | Pylint W0102, line 10 | Shared list between calls | Use None and allocate a list |
-| Bare except | Bandit B110 / Flake8 E722, lines 20–26 | All errors hidden | Safe ID lookup with explicit False |
-| File handling | Pylint R1732, lines 44–54 | Handles opened without with | Context-managed UTF-8 files |
-| Unsafe eval | Bandit B307 medium, line 93 | Unnecessary dynamic execution | Remove branch entirely |
-| Missing ticket IDs | Manual finding, lines 30–32 and 66 | Possible KeyError | Guard access |
-| Unused imports and count | Flake8 F401/F841, lines 4–5/84 | Dead code | Remove names |
-| Comparing to None | Flake8 E711, line 37 | Style issue | Use identity-based conditions |
-| Long lines | Flake8 E501, several lines | Unreadable expressions | Reformat to 79 columns |
-| Inconsistent name | Pylint C0103, line 66 | CamelCase | Add snake_case, preserve alias |
+| Unsafe dynamic evaluation | Bandit B307 (medium), line 92 | Unnecessary `eval()` | Removed the unsafe demo branch |
+| Silent exception handling | Bandit B110 (low), Flake8 E722, line 24 | Bare `except` suppressed errors | Use a safe lookup and explicit False return |
+| Shared mutable default argument | Pylint W0102, line 10 | `audit_log=[]` shared across calls | Use `None`, allocate a new list |
+| Unmanaged file handles | Pylint R1732, lines 46, 53 | Manual `open` and `close` | Context managers and UTF-8 encoding |
+| Unhandled unknown tickets | Behavioral review, lines 30, 67, 71 | Missing IDs caused `KeyError` | Guard accesses and return an explicit result |
+| Unused imports and local variable | Flake8 F401/F841, lines 4–5, 84 | `sys`, `random` and `count` unused | Removed unused names |
+| Non-idiomatic None comparison | Flake8 E711, line 37 | Uses `!= None` | Identity-aware filtering |
+| Long lines | Flake8 E501, multiple lines | Violates PEP 8 formatting | Reflowed signature, conditionals, calls |
+| Non-standard function name | Pylint C0103, line 66 | `closeTicket` is not snake_case | Added `close_ticket`, kept compatibility alias |
 
-### Evidence
+## Confirmed scanner results
 
-Original preliminary scan: Pylint 5.00/10; Bandit B110 low and B307 medium; Flake8 12 findings. Earlier corrected preliminary scan: Pylint 9.71/10; no Bandit/Flake8 findings. Full actual scanner outputs for this published revision are generated and downloadable through the GitHub Actions workflow; summaries do not replace raw logs.
+| Scanner | Original | Corrected |
+| --- | --- | --- |
+| Pylint | 5.00/10 | 9.71/10 |
+| Bandit | B307 medium, B110 low | No findings |
+| Flake8 | 12 findings | No findings |
+
+**Evidence:** The raw, unedited outputs from GitHub Actions are committed in `reports/before/` and `reports/after/`. The corrected Pylint score clears the faculty's **above 9.5** requirement. The remaining two Pylint notices concern the existing function's six-argument signature and were retained to preserve compatibility.

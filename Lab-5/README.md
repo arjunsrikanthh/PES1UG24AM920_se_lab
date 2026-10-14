@@ -1,19 +1,22 @@
 # Lab 5 — Static Code Analysis
 
-**Student SRN:** PES1UG24AM920 · **Section:** H
+**SRN:** PES1UG24AM920 · **Section:** H
 
-Assigned starter: [SETAPESU26/L5_58_support-ticket-tracker](https://github.com/SETAPESU26/L5_58_support-ticket-tracker). The faculty handout was emailed on 14 October 2026.
+**Assigned program:** [L5_58_support-ticket-tracker](https://github.com/SETAPESU26/L5_58_support-ticket-tracker) · **Faculty handout:** 14 October 2026
 
-## Submission
+## Files
 
-- `support_ticket_tracker.py`: corrected program.
-- `support_ticket_tracker_original.py.txt`: exact original starter for baseline comparison.
-- `issues.md`: issue table documenting nine classes of problems.
-- `reflection.md`: four reflections derived from handout learning objectives.
-- `tests/test_tracker.py`: seven regression tests.
-- `reports/before/README.md`, `reports/after/README.md`: preliminary results and precise location of raw CI scanner reports.
+| File | Purpose |
+| --- | --- |
+| [support_ticket_tracker.py](support_ticket_tracker.py) | Cleaned Python program |
+| [issues.md](issues.md) | Static-analysis issue register and fixes |
+| [reflection.md](reflection.md) | Reflection answers |
+| [reports/before](reports/before) | Original Pylint, Bandit and Flake8 reports |
+| [reports/after](reports/after) | Corrected Pylint, Bandit and Flake8 reports |
 
-## Execute and scan
+The six report files are **actual outputs of the completed GitHub Actions run** for the original faculty starter and the corrected program. An empty `reports/after/flake8_report.txt` is expected: Flake8 found no issues.
+
+## Reproduce
 
 ```bash
 cd Lab-5
@@ -21,14 +24,15 @@ python3 -m venv venv
 source venv/bin/activate
 pip install pylint bandit flake8
 python support_ticket_tracker.py
-python -m unittest discover -s tests -v
 pylint support_ticket_tracker.py
 bandit -r support_ticket_tracker.py
 flake8 support_ticket_tracker.py
 ```
 
-### Evidence
+| Scanner | Before | After |
+| --- | --- | --- |
+| Pylint | 5.00/10 | 9.71/10 |
+| Bandit | Two findings (one medium, one low) | Zero findings |
+| Flake8 | 12 findings | Zero findings |
 
-The `SE Lab 5 static analysis` workflow under GitHub Actions runs all three scanners on **both** the unmodified starter and corrected source; it uploads six actual raw report files in one `lab5-static-analysis-before-after` artifact. It also enforces Pylint >9.5 and zero Bandit/Flake8 findings on the corrected file.
-
-Three successive commits distinguish Pylint improvements, Flake8 findings/documentation and the Bandit security cleanup. This work was published via GitHub, without touching the student's Mac after they asked for isolation.
+**Source history:** The three preceding Lab 5 commits document corrections by analysis category. The unmodified starter remains available through the faculty's assigned repository; it is not duplicated in this submission. The [successful verification run](https://github.com/arjunsrikanthh/PES1UG24AM920_se_lab/actions/runs/38530383574) retains the original and corrected code and scan artifact.
