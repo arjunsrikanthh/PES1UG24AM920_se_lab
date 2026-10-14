@@ -1,6 +1,6 @@
 # Software Engineering Lab - PES1UG24AM920
 
-Arjun Srikanth  
+Arjun Srikanth
 Problem Statement #48: Incident Escalation & On-Call Rotation Engine
 
 ## Lab-1
@@ -28,3 +28,9 @@ Assigned Vibe Coding project: [08 Helicopter](https://github.com/SETAPESU26/08_h
 - [Before video](Lab-4/before.mp4) and [after video](Lab-4/after.mp4)
 - [Updated Python code](Lab-4/helicopter)
 - [Chat history PDF](Lab-4/PES1UG24AM920.pdf)
+
+## Lab-5
+
+- [Static Code Analysis submission](Lab-5/README.md) — faculty-assigned support ticket tracker
+- [Issue register](Lab-5/issues.md)
+- [Reflection answers](Lab-5/reflection.md)

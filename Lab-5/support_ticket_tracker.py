@@ -1,7 +1,6 @@
-"""Small support-ticket tracker for the static-analysis exercise."""
+"""Small support ticket tracker with safer operations and JSON persistence."""
 
 import json
-import os
 import logging
 from pathlib import Path
 
@@ -37,7 +36,7 @@ def create_ticket(
 
 
 def assign_ticket(ticket_id, agent, notify=False):
-    """Assign an existing ticket, returning False if it is missing."""
+    """Assign an existing ticket; return False if it is missing."""
     ticket = TICKETS.get(ticket_id)
     if ticket is None:
         return False
@@ -48,7 +47,7 @@ def assign_ticket(ticket_id, agent, notify=False):
 
 
 def update_status(ticket_id, status):
-    """Update an existing ticket; return None for an unknown ID."""
+    """Set ticket status, returning None if no such ticket exists."""
     ticket = TICKETS.get(ticket_id)
     if ticket is None:
         return None
@@ -57,7 +56,7 @@ def update_status(ticket_id, status):
 
 
 def search_tickets(status=None, priority=None):
-    """Return tickets matching optional status and priority filters."""
+    """Find tickets matching optional filters."""
     return [
         ticket
         for ticket in TICKETS.values()
@@ -67,13 +66,13 @@ def search_tickets(status=None, priority=None):
 
 
 def save_tickets(path="tickets.json"):
-    """Persist tickets to a JSON file."""
+    """Write tickets as UTF-8 JSON."""
     with Path(path).open("w", encoding="utf-8") as stream:
         json.dump(TICKETS, stream, indent=2)
 
 
 def load_tickets(path="tickets.json"):
-    """Restore tickets after checking the top-level JSON type."""
+    """Load JSON tickets and validate basic structure."""
     with Path(path).open("r", encoding="utf-8") as stream:
         data = json.load(stream)
     if not isinstance(data, dict) or any(
@@ -85,7 +84,7 @@ def load_tickets(path="tickets.json"):
 
 
 def print_ticket_report():
-    """Display a basic report of saved tickets."""
+    """Print the current ticket summary."""
     print("Support Tickets")
     if not TICKETS:
         print("No tickets yet")
@@ -94,23 +93,23 @@ def print_ticket_report():
 
 
 def close_ticket(ticket_id):
-    """Close a ticket if present and indicate success."""
+    """Close an existing ticket; return whether it was found."""
     return update_status(ticket_id, "closed") is not None
 
 
 def closeTicket(ticket_id):  # pylint: disable=invalid-name
-    """Backward-compatible alias for the starter function."""
+    """Keep compatibility with the original public function name."""
     return close_ticket(ticket_id)
 
 
 def is_open(ticket_id):
-    """Return True for open or in-progress tickets."""
+    """Check whether a ticket is open or in progress."""
     ticket = TICKETS.get(ticket_id)
     return ticket is not None and ticket["status"] in {"open", "in_progress"}
 
 
 def main():
-    """Run a small interactive ticket-management example."""
+    """Demonstrate basic support-ticket operations."""
     logging.basicConfig(level=logging.INFO)
     create_ticket(
         "Cannot sign in", "Password reset link fails", "alex@example.com"
@@ -127,8 +126,6 @@ def main():
     if ticket_id and not close_ticket(ticket_id):
         print(f"Ticket {ticket_id} not found; nothing closed")
     save_tickets()
-    if os.environ.get("RUN_UNSAFE_DEMO") == "1":
-        eval("print('unsafe demo')")
 
 
 if __name__ == "__main__":

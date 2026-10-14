@@ -3,3 +3,6 @@ __pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
+Lab-5/venv/
+Lab-5/tickets.json
+Lab-5/.coverage
