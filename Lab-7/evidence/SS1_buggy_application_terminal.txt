@@ -1,0 +1,15 @@
+$ python income_tax_parser.py (PAN valid; amount=not money)
+==== Running clean_pan ====
+Enter a PAN (e.g. abcde 1234f): Cleaned PAN: ABCDE1234F
+
+==== Running parse_amount ====
+Enter an amount (e.g. Rs 12,50,000): Traceback (most recent call last):
+  File "/private/tmp/se-labs-920/submission/Lab-7/income_tax_parser.py", line 39, in <module>
+    main()
+  File "/private/tmp/se-labs-920/submission/Lab-7/income_tax_parser.py", line 32, in main
+    print("Amount in rupees:", parse_amount(value))
+                               ^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/se-labs-920/submission/Lab-7/income_tax_parser.py", line 14, in parse_amount
+    return int(text)
+           ^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'not money'

@@ -6,3 +6,7 @@ __pycache__/
 Lab-5/venv/
 Lab-5/tickets.json
 Lab-5/.coverage
+
+# Test and coverage caches
+.coverage
+.hypothesis/
