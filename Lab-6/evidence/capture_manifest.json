@@ -1,0 +1,31 @@
+{
+  "method": "Native macOS Terminal.app window capture using screencapture -l. Raw RGBA originals retained in private working folder; supplied RGB PNGs are flattened onto the actual black background. No terminal content was drawn or generated.",
+  "captures": [
+    {
+      "label": "L6_SS1_statement",
+      "captured_at_utc": "2026-11-12T08:31:42.586144+00:00",
+      "commands_sha256": "225e8ad7b37d2641c9fb268b76a0dc40ebaa9d31fc169b7fba87e18eae33065e",
+      "window_id": 1590,
+      "session": "se_lab67_920",
+      "screen_text_sha256": "95d13f6cbac4a6c40b499ea9a5512d47d381e032b201bc2de2dee2e12050b689",
+      "width": 1840,
+      "height": 704,
+      "raw_pix_fmt": "rgba",
+      "raw_sha256": "19270a37ea06e67d77ffefc9d15b04916cc6868ee10c60ef1bc08730d3b8f602",
+      "black_sha256": "5bcad4cb098779d6f0ac45e92298c6f6b96acdd3ee8e2d05f1892dc130bbe4f6"
+    },
+    {
+      "label": "L6_SS2_branch",
+      "captured_at_utc": "2026-11-12T08:31:45.759533+00:00",
+      "commands_sha256": "d2e67180cdb39858c6fd8ea78268bb062cbf7b5e4a3bff566658a32b1c22dedc",
+      "window_id": 1590,
+      "session": "se_lab67_920",
+      "screen_text_sha256": "e041e471c373ad2cd9907bed25547f87573d06691e4113f4f7497a5ca2836713",
+      "width": 1840,
+      "height": 704,
+      "raw_pix_fmt": "rgba",
+      "raw_sha256": "c6f9467581852e7af7a587db4ee0e663bb36c3dcad5feb410ca63a5350c22977",
+      "black_sha256": "31fd86893f1676a967009438fdd2baf6bd50f7823d240944f964dc02fc2e993c"
+    }
+  ]
+}
