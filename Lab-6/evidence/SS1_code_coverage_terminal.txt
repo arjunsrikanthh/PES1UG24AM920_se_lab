@@ -1,27 +1,7 @@
-============================= test session starts ==============================
-platform darwin -- Python 3.12.15, pytest-9.2.0, pluggy-1.7.0 -- /private/tmp/se-labs-920/.venv/bin/python
-cachedir: .pytest_cache
-hypothesis profile 'default'
-rootdir: /private/tmp/se-labs-920/submission/Lab-6
-plugins: hypothesis-6.170.15
-collecting ... collected 14 items
-
-CodeCoverageTest_income_tax.py::test_new_regime_taxable_income PASSED    [  7%]
-CodeCoverageTest_income_tax.py::test_old_regime_investment_deduction_is_capped PASSED [ 14%]
-CodeCoverageTest_income_tax.py::test_gross_income_smaller_than_deduction PASSED [ 21%]
-CodeCoverageTest_income_tax.py::test_negative_gross_is_rejected PASSED   [ 28%]
-CodeCoverageTest_income_tax.py::test_unknown_tax_regime_is_rejected PASSED [ 35%]
-CodeCoverageTest_income_tax.py::test_negative_taxable_amount_is_rejected PASSED [ 42%]
-CodeCoverageTest_income_tax.py::test_super_senior_exemption PASSED       [ 50%]
-CodeCoverageTest_income_tax.py::test_senior_citizen_first_slab PASSED    [ 57%]
-CodeCoverageTest_income_tax.py::test_non_senior_higher_slab PASSED       [ 64%]
-CodeCoverageTest_income_tax.py::test_refund_statuses[11000-10000-True-refund] PASSED [ 71%]
-CodeCoverageTest_income_tax.py::test_refund_statuses[11000-10000-False-refund delayed] PASSED [ 78%]
-CodeCoverageTest_income_tax.py::test_refund_statuses[9000-10000-True-pay balance] PASSED [ 85%]
-CodeCoverageTest_income_tax.py::test_refund_statuses[9000-10000-False-pay balance with penalty] PASSED [ 92%]
-CodeCoverageTest_income_tax.py::test_refund_statuses[10000-10000-False-settled] PASSED [100%]
-
-============================== 14 passed in 0.75s ==============================
+$ python -m coverage run --source=income_tax -m pytest -q CodeCoverageTest_income_tax.py
+..............                                                           [100%]
+14 passed in 0.61s
+$ python -m coverage report -m
 Name            Stmts   Miss  Cover   Missing
 ---------------------------------------------
 income_tax.py      39      0   100%

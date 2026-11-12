@@ -1,20 +1,5 @@
 $ python -m pytest -q --tb=line test_income_tax_parser.py
-=== Original faculty program: expected RED test run ===
-FFFF.F.F.FF..FFFFF....FFFFFF.                                            [100%]
-=================================== FAILURES ===================================
-E   AttributeError: 'NoneType' object has no attribute 'strip'
 
-During handling of the above exception, another exception occurred:
-E   Failed: clean_pan crashed on None: AttributeError("'NoneType' object has no attribute 'strip'")
-    Failing explicit example: test_clean_pan_no_crash(
-        s=None,
-[... middle tracebacks cropped for legibility; full raw log saved ...]
-/private/tmp/se-labs-920/baseline_lab7/income_tax_parser.py:21: ValueError: not enough values to unpack (expected 2, got 1)
-E   ValueError: not enough values to unpack (expected 2, got 1)
-/private/tmp/se-labs-920/baseline_lab7/income_tax_parser.py:21: ValueError: not enough values to unpack (expected 2, got 1)
-E   AttributeError: 'NoneType' object has no attribute 'split'
-/private/tmp/se-labs-920/baseline_lab7/income_tax_parser.py:21: AttributeError: 'NoneType' object has no attribute 'split'
-=========================== short test summary info ============================
 FAILED test_income_tax_parser.py::test_clean_pan_no_crash - Failed: clean_pan...
 FAILED test_income_tax_parser.py::test_parse_amount_no_crash - Failed: parse_...
 FAILED test_income_tax_parser.py::test_parse_tax_slab_no_crash - Failed: pars...
@@ -34,4 +19,4 @@ FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[10-20:three-None]
 FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[100 - 200-None]
 FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[-None] - Value...
 FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[None-None] - A...
-19 failed, 10 passed in 0.65s
+19 failed, 10 passed in 0.99s

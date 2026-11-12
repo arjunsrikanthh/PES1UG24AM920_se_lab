@@ -1,4 +1,4 @@
-$ python income_tax_parser.py (PAN valid; amount=not money; slab=invalid slab)
+$ python income_tax_parser.py (same inputs after validation fixes)
 ==== Running clean_pan ====
 Enter a PAN (e.g. abcde 1234f): Cleaned PAN: ABCDE1234F
 
