@@ -1,0 +1,30 @@
+PES1UG24AM920 before $ python -m pytest -q test_income_tax_parser.py -k clean_pan_no_crash --tb=shor
+t --hypothesis-seed=920
+F                                                                                            [100%]
+============================================= FAILURES =============================================
+_____________________________________ test_clean_pan_no_crash ______________________________________
+test_income_tax_parser.py:13: in test_clean_pan_no_crash
+    result = clean_pan(s)
+income_tax_parser.py:6: in clean_pan
+    return pan.strip().replace(' ', '').upper()
+E   AttributeError: 'NoneType' object has no attribute 'strip'
+
+During handling of the above exception, another exception occurred:
+test_income_tax_parser.py:9: in test_clean_pan_no_crash
+    @example(None)
+../venv/lib/python3.9/site-packages/hypothesis/core.py:1613: in _raise_to_user
+    raise the_error_hypothesis_found
+test_income_tax_parser.py:15: in test_clean_pan_no_crash
+    pytest.fail(f"clean_pan crashed on {s!r}: {exc!r}")
+E   Failed: clean_pan crashed on None: AttributeError("'NoneType' object has no attribute 'strip'")
+E   Falsifying explicit example: test_clean_pan_no_crash(
+E       s=None,
+E   )
+===================================== short test summary info ======================================
+FAILED test_income_tax_parser.py::test_clean_pan_no_crash - Failed: clean_pan crashed on None: At...
+1 failed, 28 deselected in 0.04s
+PES1UG24AM920 before $
+
+
+
+

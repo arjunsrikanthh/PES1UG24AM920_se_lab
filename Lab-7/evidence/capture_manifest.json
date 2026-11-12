@@ -1,0 +1,70 @@
+{
+  "method": "Native macOS Terminal.app window capture using screencapture -l. Raw RGBA originals retained in private working folder; supplied RGB PNGs are flattened onto the actual black background. No terminal content was drawn or generated.",
+  "captures": [
+    {
+      "label": "L7_SS1_buggy",
+      "captured_at_utc": "2026-11-12T08:31:49.860669+00:00",
+      "commands_sha256": "a167e888686fb1267d7b89ce7c6849aa5be49bf4d595cbc5b292fbaa1e1f7e8a",
+      "window_id": 1590,
+      "session": "se_lab67_920",
+      "screen_text_sha256": "e6dca997762cea4e92e492c2552d25f4883fad3b2152d363e0ae935688133963",
+      "width": 1840,
+      "height": 1008,
+      "raw_pix_fmt": "rgba",
+      "raw_sha256": "5545bc9f959b748e0cdeebef74cd45111708c6d1ca0730cee529029c54834cfe",
+      "black_sha256": "d98f2d73b240a61302459f449020a2c44ec00f7da952190568968c16beb9e9e3"
+    },
+    {
+      "label": "L7_SS2a_counterexample",
+      "captured_at_utc": "2026-11-12T08:31:52.662375+00:00",
+      "commands_sha256": "ca9336ddb3bbfd44d2de2699428a1c59c40ffa4f1c603624eab7822fa922c94f",
+      "window_id": 1590,
+      "session": "se_lab67_920",
+      "screen_text_sha256": "629ca90b46b3b4db8ab4dadec6c9fb766ae08dc58f1e2840eb52e86547c97f61",
+      "width": 1840,
+      "height": 1236,
+      "raw_pix_fmt": "rgba",
+      "raw_sha256": "36ac41afd356afd7a43e0b1fe3c6228cd57ce21d6ead03f344506cc0cf3e430a",
+      "black_sha256": "3e565c6fa2af68ca847185fcdc8ae7f4ad748a07e15015456b028722a41370b3"
+    },
+    {
+      "label": "L7_SS2b_failures",
+      "captured_at_utc": "2026-11-12T08:31:55.642808+00:00",
+      "commands_sha256": "70e03ae9d38cf1de82c305c9b13c566753f8d4ff6b29ddf991d29967cc4510ad",
+      "window_id": 1590,
+      "session": "se_lab67_920",
+      "screen_text_sha256": "7bdba88d8ff8ad9304e7ee6b88d01dd1e6d3d3f374d2de81ed71bc11b1ea263b",
+      "width": 1840,
+      "height": 552,
+      "raw_pix_fmt": "rgba",
+      "raw_sha256": "a8a73d15d39111058e120b0aa420d5a22d3402ac9f974ac07e77033cf9e98a20",
+      "black_sha256": "95507060ac1a0d83204333fe4057aac4531b40914ceeabb795212d24c3ca4264"
+    },
+    {
+      "label": "L7_SS3_fixed",
+      "captured_at_utc": "2026-11-12T08:32:00.153656+00:00",
+      "commands_sha256": "555143cb546f133e13cb997f1e33e2c8c82ed5b686c022faf226eace669a6fec",
+      "window_id": 1590,
+      "session": "se_lab67_920",
+      "screen_text_sha256": "c7022c3e12fa6dff1724179b5dedeccacb903751170d4f2b595dbce30d1f767b",
+      "width": 1840,
+      "height": 780,
+      "raw_pix_fmt": "rgba",
+      "raw_sha256": "ee1c1cf33d5d6178c827273d2942acdddc0dd98eb76f156ac87465f66f4cf83d",
+      "black_sha256": "0a27a3f84152a151941fd85729b9b8d820de0da76d8b4c847e6197b84d512dcb"
+    },
+    {
+      "label": "L7_SS4_passing",
+      "captured_at_utc": "2026-11-12T08:32:02.877491+00:00",
+      "commands_sha256": "e88a55c0ffd0e028555104af1a7661b8792c6a1df8b21e9f54b0424479b63c86",
+      "window_id": 1590,
+      "session": "se_lab67_920",
+      "screen_text_sha256": "38555157bd92cd499f486f08668cd41167e37f2f1e319986dce8aa57754bbf02",
+      "width": 1840,
+      "height": 552,
+      "raw_pix_fmt": "rgba",
+      "raw_sha256": "c5bf654085d83390d7a2f955660d05ed0e9665a9a9b743be3a291660c808f2ec",
+      "black_sha256": "6a4f908804bd75d6e23c9f801aa4f6665142e8064d41caf72845c5098bf3cfa2"
+    }
+  ]
+}

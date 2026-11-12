@@ -1,0 +1,12 @@
+PES1UG24AM920 Lab-7 $ python -m pytest -q test_income_tax_parser.py --hypothesis-seed=920
+.............................                                                                [100%]
+29 passed in 0.24s
+PES1UG24AM920 Lab-7 $
+
+
+
+
+
+
+
+
