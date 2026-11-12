@@ -34,3 +34,16 @@ Assigned Vibe Coding project: [08 Helicopter](https://github.com/SETAPESU26/08_h
 - [Static Code Analysis submission](Lab-5/README.md) — faculty-assigned support ticket tracker
 - [Issue register](Lab-5/issues.md)
 - [Reflection answers](Lab-5/reflection.md)
+
+
+## Lab-6
+
+- [Coverage report](Lab-6/PES1UG24AM920.pdf) and [submission files](Lab-6/README.md) for the assigned income tax calculator.
+- [Statement tests](Lab-6/CodeCoverageTest_income_tax.py) and [branch tests](Lab-6/BranchCoverageTest_income_tax.py).
+- **Verified 100% statement and 100% branch coverage**, with two separate commits.
+
+## Lab-7
+
+- [Fuzz testing report](Lab-7/PES1UG24AM920.pdf) and [submission files](Lab-7/README.md) for PAN, amount and tax slab input parsing.
+- [Corrected application](Lab-7/income_tax_parser.py), [fuzz tests](Lab-7/test_income_tax_parser.py) and [evidence PDF](Lab-7/PES1UG24AM920.pdf).
+- **Verified 29 tests passing** after exposing 19 failures in the original implementation.

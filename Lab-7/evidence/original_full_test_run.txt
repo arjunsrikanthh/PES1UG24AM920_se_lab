@@ -1,0 +1,193 @@
+FFFF.F.F.FF..FFFFF....FFFFFF.                                            [100%]
+=================================== FAILURES ===================================
+___________________________ test_clean_pan_no_crash ____________________________
+test_income_tax_parser.py:13: in test_clean_pan_no_crash
+    result = clean_pan(s)
+income_tax_parser.py:6: in clean_pan
+    return pan.strip().replace(' ', '').upper()
+E   AttributeError: 'NoneType' object has no attribute 'strip'
+
+During handling of the above exception, another exception occurred:
+test_income_tax_parser.py:9: in test_clean_pan_no_crash
+    @example(None)
+../venv/lib/python3.9/site-packages/hypothesis/core.py:1613: in _raise_to_user
+    raise the_error_hypothesis_found
+test_income_tax_parser.py:15: in test_clean_pan_no_crash
+    pytest.fail(f"clean_pan crashed on {s!r}: {exc!r}")
+E   Failed: clean_pan crashed on None: AttributeError("'NoneType' object has no attribute 'strip'")
+E   Falsifying explicit example: test_clean_pan_no_crash(
+E       s=None,
+E   )
+__________________________ test_parse_amount_no_crash __________________________
+test_income_tax_parser.py:25: in test_parse_amount_no_crash
+    result = parse_amount(s)
+income_tax_parser.py:13: in parse_amount
+    text = text.replace('Rs', '').replace(',', '').strip()
+E   AttributeError: 'NoneType' object has no attribute 'replace'
+
+During handling of the above exception, another exception occurred:
+test_income_tax_parser.py:21: in test_parse_amount_no_crash
+    @example(None)
+../venv/lib/python3.9/site-packages/hypothesis/core.py:1613: in _raise_to_user
+    raise the_error_hypothesis_found
+test_income_tax_parser.py:27: in test_parse_amount_no_crash
+    pytest.fail(f"parse_amount crashed on {s!r}: {exc!r}")
+E   Failed: parse_amount crashed on None: AttributeError("'NoneType' object has no attribute 'replace'")
+E   Falsifying explicit example: test_parse_amount_no_crash(
+E       s=None,
+E   )
+_________________________ test_parse_tax_slab_no_crash _________________________
+test_income_tax_parser.py:36: in test_parse_tax_slab_no_crash
+    result = parse_tax_slab(s)
+income_tax_parser.py:21: in parse_tax_slab
+    limits, rate = line.split(':')
+E   AttributeError: 'NoneType' object has no attribute 'split'
+
+During handling of the above exception, another exception occurred:
+test_income_tax_parser.py:32: in test_parse_tax_slab_no_crash
+    @example(None)
+../venv/lib/python3.9/site-packages/hypothesis/core.py:1613: in _raise_to_user
+    raise the_error_hypothesis_found
+test_income_tax_parser.py:38: in test_parse_tax_slab_no_crash
+    pytest.fail(f"parse_tax_slab crashed on {s!r}: {exc!r}")
+E   Failed: parse_tax_slab crashed on None: AttributeError("'NoneType' object has no attribute 'split'")
+E   Falsifying explicit example: test_parse_tax_slab_no_crash(
+E       s=None,
+E   )
+______________________ test_non_string_types_never_crash _______________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/test_income_tax_parser.py", line 49, in test_non_string_types_never_crash
+  |     @given(st.one_of(
+  |   File "/Users/arjun/Downloads/SE_lab/.lab67-work/venv/lib/python3.9/site-packages/hypothesis/core.py", line 2124, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | exceptiongroup.ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/test_income_tax_parser.py", line 58, in test_non_string_types_never_crash
+    |     assert clean_pan(value) == ""
+    |   File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/income_tax_parser.py", line 6, in clean_pan
+    |     return pan.strip().replace(' ', '').upper()
+    | TypeError: a bytes-like object is required, not 'str'
+    | Falsifying example: test_non_string_types_never_crash(
+    |     value=b'',
+    | )
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/test_income_tax_parser.py", line 58, in test_non_string_types_never_crash
+    |     assert clean_pan(value) == ""
+    |   File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/income_tax_parser.py", line 6, in clean_pan
+    |     return pan.strip().replace(' ', '').upper()
+    | AttributeError: 'int' object has no attribute 'strip'
+    | Falsifying example: test_non_string_types_never_crash(
+    |     value=0,  # or any other generated value
+    | )
+    +------------------------------------
+____________ test_clean_pan_examples[  abcde\t1234f \n-ABCDE1234F] _____________
+test_income_tax_parser.py:73: in test_clean_pan_examples
+    assert clean_pan(input_pan) == expected
+E   AssertionError: assert 'ABCDE\t1234F' == 'ABCDE1234F'
+E     
+E     - ABCDE1234F
+E     + ABCDE	1234F
+E     ?      +
+________________________ test_clean_pan_examples[None-] ________________________
+test_income_tax_parser.py:73: in test_clean_pan_examples
+    assert clean_pan(input_pan) == expected
+income_tax_parser.py:6: in clean_pan
+    return pan.strip().replace(' ', '').upper()
+E   AttributeError: 'NoneType' object has no attribute 'strip'
+__________________ test_parse_amount_examples[rs. 1,234-1234] __________________
+test_income_tax_parser.py:92: in test_parse_amount_examples
+    assert parse_amount(value) == expected
+income_tax_parser.py:14: in parse_amount
+    return int(text)
+E   ValueError: invalid literal for int() with base 10: 'rs. 1234'
+______________ test_parse_amount_examples[\u20b9 2,50,000-250000] ______________
+test_income_tax_parser.py:92: in test_parse_amount_examples
+    assert parse_amount(value) == expected
+income_tax_parser.py:14: in parse_amount
+    return int(text)
+E   ValueError: invalid literal for int() with base 10: '₹ 250000'
+___________________ test_parse_amount_examples[Rs -50-None] ____________________
+test_income_tax_parser.py:92: in test_parse_amount_examples
+    assert parse_amount(value) == expected
+E   AssertionError: assert -50 == None
+E    +  where -50 = parse_amount('Rs -50')
+____________________ test_parse_amount_examples[1,2,3-None] ____________________
+test_income_tax_parser.py:92: in test_parse_amount_examples
+    assert parse_amount(value) == expected
+E   AssertionError: assert 123 == None
+E    +  where 123 = parse_amount('1,2,3')
+______________________ test_parse_amount_examples[-None] _______________________
+test_income_tax_parser.py:92: in test_parse_amount_examples
+    assert parse_amount(value) == expected
+income_tax_parser.py:14: in parse_amount
+    return int(text)
+E   ValueError: invalid literal for int() with base 10: ''
+__________________ test_parse_amount_examples[not money-None] __________________
+test_income_tax_parser.py:92: in test_parse_amount_examples
+    assert parse_amount(value) == expected
+income_tax_parser.py:14: in parse_amount
+    return int(text)
+E   ValueError: invalid literal for int() with base 10: 'not money'
+____________________ test_parse_amount_examples[None-None] _____________________
+test_income_tax_parser.py:92: in test_parse_amount_examples
+    assert parse_amount(value) == expected
+income_tax_parser.py:13: in parse_amount
+    text = text.replace('Rs', '').replace(',', '').strip()
+E   AttributeError: 'NoneType' object has no attribute 'replace'
+______________ test_parse_tax_slab_examples[500000-250000:5-None] ______________
+test_income_tax_parser.py:116: in test_parse_tax_slab_examples
+    assert parse_tax_slab(value) == expected
+E   AssertionError: assert (500000, 250000, 5) == None
+E    +  where (500000, 250000, 5) = parse_tax_slab('500000-250000:5')
+________________ test_parse_tax_slab_examples[100-200:101-None] ________________
+test_income_tax_parser.py:116: in test_parse_tax_slab_examples
+    assert parse_tax_slab(value) == expected
+E   AssertionError: assert (100, 200, 101) == None
+E    +  where (100, 200, 101) = parse_tax_slab('100-200:101')
+________________ test_parse_tax_slab_examples[10-20:three-None] ________________
+test_income_tax_parser.py:116: in test_parse_tax_slab_examples
+    assert parse_tax_slab(value) == expected
+income_tax_parser.py:23: in parse_tax_slab
+    return int(low), int(high), int(rate)
+E   ValueError: invalid literal for int() with base 10: 'three'
+_________________ test_parse_tax_slab_examples[100 - 200-None] _________________
+test_income_tax_parser.py:116: in test_parse_tax_slab_examples
+    assert parse_tax_slab(value) == expected
+income_tax_parser.py:21: in parse_tax_slab
+    limits, rate = line.split(':')
+E   ValueError: not enough values to unpack (expected 2, got 1)
+_____________________ test_parse_tax_slab_examples[-None] ______________________
+test_income_tax_parser.py:116: in test_parse_tax_slab_examples
+    assert parse_tax_slab(value) == expected
+income_tax_parser.py:21: in parse_tax_slab
+    limits, rate = line.split(':')
+E   ValueError: not enough values to unpack (expected 2, got 1)
+___________________ test_parse_tax_slab_examples[None-None] ____________________
+test_income_tax_parser.py:116: in test_parse_tax_slab_examples
+    assert parse_tax_slab(value) == expected
+income_tax_parser.py:21: in parse_tax_slab
+    limits, rate = line.split(':')
+E   AttributeError: 'NoneType' object has no attribute 'split'
+=========================== short test summary info ============================
+FAILED test_income_tax_parser.py::test_clean_pan_no_crash - Failed: clean_pan...
+FAILED test_income_tax_parser.py::test_parse_amount_no_crash - Failed: parse_...
+FAILED test_income_tax_parser.py::test_parse_tax_slab_no_crash - Failed: pars...
+FAILED test_income_tax_parser.py::test_non_string_types_never_crash - excepti...
+FAILED test_income_tax_parser.py::test_clean_pan_examples[  abcde\t1234f \n-ABCDE1234F]
+FAILED test_income_tax_parser.py::test_clean_pan_examples[None-] - AttributeE...
+FAILED test_income_tax_parser.py::test_parse_amount_examples[rs. 1,234-1234]
+FAILED test_income_tax_parser.py::test_parse_amount_examples[\u20b9 2,50,000-250000]
+FAILED test_income_tax_parser.py::test_parse_amount_examples[Rs -50-None] - A...
+FAILED test_income_tax_parser.py::test_parse_amount_examples[1,2,3-None] - As...
+FAILED test_income_tax_parser.py::test_parse_amount_examples[-None] - ValueEr...
+FAILED test_income_tax_parser.py::test_parse_amount_examples[not money-None]
+FAILED test_income_tax_parser.py::test_parse_amount_examples[None-None] - Att...
+FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[500000-250000:5-None]
+FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[100-200:101-None]
+FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[10-20:three-None]
+FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[100 - 200-None]
+FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[-None] - Value...
+FAILED test_income_tax_parser.py::test_parse_tax_slab_examples[None-None] - A...
+19 failed, 10 passed in 1.06s

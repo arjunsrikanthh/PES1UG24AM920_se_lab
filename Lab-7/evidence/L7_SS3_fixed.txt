@@ -1,0 +1,18 @@
+PES1UG24AM920 before $ cd ../submission/Lab-7
+PES1UG24AM920 Lab-7 $ python income_tax_parser.py
+==== Running clean_pan ====
+Enter a PAN (e.g. abcde 1234f): abcde 1234f
+Cleaned PAN: ABCDE1234F
+
+==== Running parse_amount ====
+Enter an amount (e.g. Rs 12,50,000): not money
+Amount in rupees: Invalid amount
+
+==== Running parse_tax_slab ====
+Enter a tax slab as LOW-HIGH:RATE (e.g. 250000-500000:5): 100 - 200
+Tax slab (low, high, rate): Invalid tax slab
+PES1UG24AM920 Lab-7 $
+
+
+
+

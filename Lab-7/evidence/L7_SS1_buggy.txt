@@ -1,0 +1,24 @@
+PES1UG24AM920 Lab-6 $ cd ../../before
+PES1UG24AM920 before $ python income_tax_parser.py
+==== Running clean_pan ====
+Enter a PAN (e.g. abcde 1234f): abcde 1234f
+Cleaned PAN: ABCDE1234F
+
+==== Running parse_amount ====
+Enter an amount (e.g. Rs 12,50,000): not money
+Traceback (most recent call last):
+  File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/income_tax_parser.py", line 39, in <module>
+    main()
+  File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/income_tax_parser.py", line 32, in main
+    print("Amount in rupees:", parse_amount(value))
+  File "/Users/arjun/Downloads/SE_lab/.lab67-work/before/income_tax_parser.py", line 14, in parse_am
+ount
+    return int(text)
+ValueError: invalid literal for int() with base 10: 'not money'
+PES1UG24AM920 before $
+
+
+
+
+
+
